@@ -55,9 +55,36 @@ body::before {
     animation: pulseBackground 8s ease-in-out infinite;
 }
 
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(2px 2px at 20% 30%, rgba(255, 0, 0, 0.3), transparent),
+        radial-gradient(2px 2px at 40% 70%, rgba(255, 0, 0, 0.2), transparent),
+        radial-gradient(1px 1px at 90% 40%, rgba(255, 0, 0, 0.4), transparent),
+        radial-gradient(1px 1px at 50% 50%, rgba(255, 0, 0, 0.2), transparent);
+    background-size: 200px 200px, 150px 150px, 100px 100px, 75px 75px;
+    background-position: 0 0, 50px 60px, 130px 270px, 70px 100px;
+    animation: particleMove 20s linear infinite;
+    z-index: -1;
+    opacity: 0.6;
+}
+
 @keyframes pulseBackground {
     0%, 100% { opacity: 0.3; }
     50% { opacity: 0.6; }
+}
+
+@keyframes particleMove {
+    0% { transform: translate(0, 0); }
+    25% { transform: translate(-20px, -20px); }
+    50% { transform: translate(20px, -40px); }
+    75% { transform: translate(-10px, 20px); }
+    100% { transform: translate(0, 0); }
 }
 
 /* Background Animation */
@@ -188,10 +215,32 @@ body::before {
     z-index: -1;
 }
 
+.header::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    background: linear-gradient(45deg, 
+        var(--primary-color) 0%, 
+        transparent 25%, 
+        transparent 75%, 
+        var(--primary-color) 100%);
+    border-radius: var(--radius-2xl);
+    z-index: -2;
+    animation: borderRotate 4s linear infinite;
+}
+
 @keyframes shimmer {
     0% { transform: translateX(-100%); }
     50% { transform: translateX(100%); }
     100% { transform: translateX(100%); }
+}
+
+@keyframes borderRotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 .logo-container {
@@ -609,6 +658,17 @@ body::before {
     line-height: 1.5;
 }
 
+.typing-cursor {
+    animation: typingBlink 1s infinite;
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+@keyframes typingBlink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
 .message-time {
     font-size: 0.75rem;
     color: var(--text-light);
@@ -748,11 +808,37 @@ body::before {
     justify-content: center;
     font-size: 16px;
     box-shadow: var(--glow-red);
+    position: relative;
+    overflow: hidden;
+}
+
+.send-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.4s, height 0.4s;
+}
+
+.send-btn:hover::before {
+    width: 60px;
+    height: 60px;
 }
 
 .send-btn:hover:not(:disabled) {
     transform: translateY(-2px) scale(1.05);
     box-shadow: var(--shadow-lg), var(--glow-red-strong);
+    animation: buttonPulse 1s ease-in-out infinite;
+}
+
+@keyframes buttonPulse {
+    0%, 100% { box-shadow: var(--shadow-lg), 0 0 20px rgba(255, 0, 0, 0.6); }
+    50% { box-shadow: var(--shadow-lg), 0 0 30px rgba(255, 0, 0, 0.9); }
 }
 
 .send-btn:disabled {
