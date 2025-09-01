@@ -2,8 +2,22 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="DMAZ Tools">
+    <meta name="application-name" content="DMAZ Tools">
+    <meta name="theme-color" content="#6366f1">
+    <meta name="color-scheme" content="light dark">
     <title>DMAZ TOOLS - AI Chat & TikTok Downloader</title>
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Apple Touch Icons -->
+    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Cdefs%3E%3ClinearGradient id='grad1' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%236366f1;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23ec4899;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='192' height='192' rx='40' fill='url(%23grad1)' /%3E%3Cpath d='M96 45c-28.2 0-51 22.8-51 51s22.8 51 51 51 51-22.8 51-51S124.2 45 96 45zm0 84c-18.2 0-33-14.8-33-33s14.8-33 33-33 33 14.8 33 33S114.2 129 96 129z' fill='white'/%3E%3Cpath d='M96 75c-11.6 0-21 9.4-21 21s9.4 21 21 21 21-9.4 21-21S107.6 75 96 75z' fill='white'/%3E%3C/svg%3E">
+    
     <link rel="stylesheet" href="style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -31,15 +45,23 @@
                     <p>Powerful AI Assistant & Social Media Downloader</p>
                 </div>
             </div>
-            <div class="header-stats">
-                <div class="stat-item">
-                    <i class="fas fa-users"></i>
-                    <span>10K+ Users</span>
+            <div class="header-actions">
+                <div class="header-stats">
+                    <div class="stat-item">
+                        <i class="fas fa-users"></i>
+                        <span>10K+ Users</span>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-download"></i>
+                        <span>50K+ Downloads</span>
+                    </div>
                 </div>
-                <div class="stat-item">
-                    <i class="fas fa-download"></i>
-                    <span>50K+ Downloads</span>
-                </div>
+                <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                </button>
             </div>
         </header>
 
@@ -126,12 +148,15 @@
                             <div class="input-field">
                                 <input type="text" id="chatInput" placeholder="Ketik pesan Anda di sini..." maxlength="1000">
                                 <div class="input-actions">
-                                    <button class="emoji-btn" onclick="toggleEmojiPicker()">
+                                    <button class="voice-btn" onclick="toggleVoiceInput()" id="voiceBtn" aria-label="Voice input">
+                                        <i class="fas fa-microphone"></i>
+                                    </button>
+                                    <button class="emoji-btn" onclick="toggleEmojiPicker()" aria-label="Add emoji">
                                         <i class="far fa-smile"></i>
                                     </button>
                                 </div>
                             </div>
-                            <button class="send-btn" onclick="sendMessage()" id="sendBtn">
+                            <button class="send-btn" onclick="sendMessage()" id="sendBtn" aria-label="Send message">
                                 <i class="fas fa-paper-plane"></i>
                             </button>
                         </div>
