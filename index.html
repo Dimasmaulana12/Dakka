@@ -3,98 +3,274 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Tools - Chat AI & TikTok Downloader</title>
+    <title>DMAZ TOOLS - AI Chat & TikTok Downloader</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="background-animation">
+        <div class="floating-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+            <div class="shape shape-4"></div>
+            <div class="shape shape-5"></div>
+        </div>
+    </div>
+
     <div class="container">
         <!-- Header -->
         <header class="header">
-            <h1><i class="fas fa-robot"></i> AI Tools</h1>
-            <p>Chat AI & TikTok Downloader</p>
+            <div class="logo-container">
+                <div class="logo">
+                    <i class="fas fa-cube"></i>
+                </div>
+                <div class="title-container">
+                    <h1>DMAZ TOOLS</h1>
+                    <p>Powerful AI Assistant & Social Media Downloader</p>
+                </div>
+            </div>
+            <div class="header-stats">
+                <div class="stat-item">
+                    <i class="fas fa-users"></i>
+                    <span>10K+ Users</span>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-download"></i>
+                    <span>50K+ Downloads</span>
+                </div>
+            </div>
         </header>
 
         <!-- Feature Selector -->
-        <div class="feature-selector">
-            <button class="feature-btn active" data-feature="chat-ai">
-                <i class="fas fa-comments"></i>
-                Chat AI
-            </button>
-            <button class="feature-btn" data-feature="tiktok-downloader">
-                <i class="fab fa-tiktok"></i>
-                TikTok Downloader
-            </button>
-        </div>
+        <nav class="feature-selector">
+            <div class="selector-wrapper">
+                <button class="feature-btn active" data-feature="chat-ai">
+                    <div class="btn-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="btn-content">
+                        <span class="btn-title">AI Chat</span>
+                        <span class="btn-desc">Smart Assistant</span>
+                    </div>
+                </button>
+                <button class="feature-btn" data-feature="tiktok-downloader">
+                    <div class="btn-icon">
+                        <i class="fab fa-tiktok"></i>
+                    </div>
+                    <div class="btn-content">
+                        <span class="btn-title">TikTok Downloader</span>
+                        <span class="btn-desc">No Watermark</span>
+                    </div>
+                </button>
+            </div>
+        </nav>
 
         <!-- Chat AI Feature -->
-        <div id="chat-ai" class="feature-content active">
+        <main id="chat-ai" class="feature-content active">
             <div class="chat-container">
                 <div class="chat-header">
-                    <h3><i class="fas fa-robot"></i> Chat dengan AI</h3>
-                    <button class="clear-chat-btn" onclick="clearChat()">
-                        <i class="fas fa-trash"></i> Clear Chat
-                    </button>
+                    <div class="chat-info">
+                        <div class="ai-avatar">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="ai-details">
+                            <h3>DMAZ AI Assistant</h3>
+                            <p class="ai-status">
+                                <span class="status-indicator"></span>
+                                Online & Ready
+                            </p>
+                        </div>
+                    </div>
+                    <div class="chat-actions">
+                        <button class="action-btn" onclick="exportChat()" title="Export Chat">
+                            <i class="fas fa-download"></i>
+                        </button>
+                        <button class="action-btn" onclick="clearChat()" title="Clear Chat">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
                 </div>
+                
                 <div class="chat-messages" id="chatMessages">
                     <div class="message ai-message">
-                        <div class="message-content">
+                        <div class="message-avatar">
                             <i class="fas fa-robot"></i>
-                            <span>Halo! Saya adalah AI assistant. Ada yang bisa saya bantu?</span>
+                        </div>
+                        <div class="message-content">
+                            <div class="message-bubble">
+                                <p>👋 Halo! Saya DMAZ AI Assistant. Saya siap membantu Anda dengan berbagai pertanyaan. Ada yang bisa saya bantu hari ini?</p>
+                            </div>
+                            <div class="message-time">
+                                <span>Baru saja</span>
+                            </div>
                         </div>
                     </div>
                 </div>
+
                 <div class="chat-input-container">
-                    <div class="input-group">
-                        <input type="text" id="chatInput" placeholder="Ketik pesan Anda..." maxlength="500">
-                        <button onclick="sendMessage()" id="sendBtn">
-                            <i class="fas fa-paper-plane"></i>
+                    <div class="input-suggestions">
+                        <button class="suggestion-chip" onclick="sendSuggestion('Jelaskan tentang AI')">
+                            <i class="fas fa-brain"></i> Jelaskan tentang AI
+                        </button>
+                        <button class="suggestion-chip" onclick="sendSuggestion('Tips belajar programming')">
+                            <i class="fas fa-code"></i> Tips Programming
+                        </button>
+                        <button class="suggestion-chip" onclick="sendSuggestion('Resep masakan sederhana')">
+                            <i class="fas fa-utensils"></i> Resep Masakan
                         </button>
                     </div>
-                    <div class="input-info">
-                        <small>Tekan Enter untuk mengirim pesan</small>
+                    <div class="input-wrapper">
+                        <div class="input-group">
+                            <div class="input-field">
+                                <input type="text" id="chatInput" placeholder="Ketik pesan Anda di sini..." maxlength="1000">
+                                <div class="input-actions">
+                                    <button class="emoji-btn" onclick="toggleEmojiPicker()">
+                                        <i class="far fa-smile"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <button class="send-btn" onclick="sendMessage()" id="sendBtn">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                        <div class="input-info">
+                            <span class="char-count">0/1000</span>
+                            <span class="shortcut">Tekan Enter untuk mengirim</span>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </main>
 
         <!-- TikTok Downloader Feature -->
-        <div id="tiktok-downloader" class="feature-content">
+        <main id="tiktok-downloader" class="feature-content">
             <div class="downloader-container">
                 <div class="downloader-header">
-                    <h3><i class="fab fa-tiktok"></i> TikTok Video Downloader</h3>
-                    <p>Download video TikTok tanpa watermark</p>
+                    <div class="feature-icon">
+                        <i class="fab fa-tiktok"></i>
+                    </div>
+                    <div class="feature-info">
+                        <h3>TikTok Video Downloader</h3>
+                        <p>Download video TikTok berkualitas tinggi tanpa watermark</p>
+                    </div>
                 </div>
                 
+                <div class="download-steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <p>Copy link video TikTok</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <p>Paste link di bawah ini</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <p>Klik download & nikmati!</p>
+                    </div>
+                </div>
+
                 <div class="download-form">
-                    <div class="input-group">
-                        <input type="url" id="tiktokUrl" placeholder="Masukkan link TikTok...">
-                        <button onclick="downloadTikTok()" id="downloadBtn">
-                            <i class="fas fa-download"></i> Download
-                        </button>
+                    <div class="form-group">
+                        <label for="tiktokUrl">Link Video TikTok</label>
+                        <div class="input-group">
+                            <div class="input-field">
+                                <i class="fab fa-tiktok input-icon"></i>
+                                <input type="url" id="tiktokUrl" placeholder="https://vt.tiktok.com/ZSY8XguF2/">
+                                <button class="paste-btn" onclick="pasteFromClipboard()">
+                                    <i class="fas fa-paste"></i>
+                                </button>
+                            </div>
+                            <button class="download-btn primary" onclick="downloadTikTok()" id="downloadBtn">
+                                <i class="fas fa-download"></i>
+                                Download
+                            </button>
+                        </div>
+                        <div class="input-help">
+                            <i class="fas fa-info-circle"></i>
+                            Pastikan link dimulai dengan https://vt.tiktok.com/ atau https://www.tiktok.com/
+                        </div>
                     </div>
-                    <div class="input-info">
-                        <small>Contoh: https://vt.tiktok.com/ZSY8XguF2/</small>
+                </div>
+
+                <div class="loading" id="loadingSpinner" style="display: none;">
+                    <div class="loading-animation">
+                        <div class="spinner"></div>
+                        <i class="fab fa-tiktok loading-icon"></i>
                     </div>
+                    <h4>Sedang memproses video...</h4>
+                    <p>Mohon tunggu sebentar</p>
                 </div>
 
                 <div class="download-result" id="downloadResult" style="display: none;">
                     <!-- Result will be displayed here -->
                 </div>
 
-                <div class="loading" id="loadingSpinner" style="display: none;">
-                    <i class="fas fa-spinner fa-spin"></i>
-                    <span>Sedang memproses...</span>
+                <div class="feature-benefits">
+                    <h4>Keunggulan DMAZ TikTok Downloader</h4>
+                    <div class="benefits-grid">
+                        <div class="benefit-item">
+                            <i class="fas fa-shield-alt"></i>
+                            <h5>100% Aman</h5>
+                            <p>Tanpa malware atau virus</p>
+                        </div>
+                        <div class="benefit-item">
+                            <i class="fas fa-tint"></i>
+                            <h5>No Watermark</h5>
+                            <p>Video bersih tanpa logo</p>
+                        </div>
+                        <div class="benefit-item">
+                            <i class="fas fa-hd-video"></i>
+                            <h5>HD Quality</h5>
+                            <p>Kualitas video terbaik</p>
+                        </div>
+                        <div class="benefit-item">
+                            <i class="fas fa-bolt"></i>
+                            <h5>Super Cepat</h5>
+                            <p>Download dalam hitungan detik</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+        </main>
 
         <!-- Footer -->
         <footer class="footer">
-            <p>&copy; 2025 AI Tools. Made with ❤️</p>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>DMAZ TOOLS</h4>
+                    <p>Platform terpercaya untuk AI chat dan download media sosial</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h5>Tools</h5>
+                    <ul>
+                        <li><a href="#">AI Chat Assistant</a></li>
+                        <li><a href="#">TikTok Downloader</a></li>
+                        <li><a href="#">Coming Soon...</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h5>Support</h5>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 DMAZ TOOLS. Made with ❤️ by Dimas Maulana</p>
+            </div>
         </footer>
     </div>
 
     <script src="script.js"></script>
 </body>
-                  </html>
+                                </html>
