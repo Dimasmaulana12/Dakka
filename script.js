@@ -1,6 +1,6 @@
 // Global variables
 let currentFeature = 'chat-ai';
-const GEMINI_API_KEY = 'YOUR_GEMINI_API_KEY'; // Ganti dengan API key Anda
+const GEMINI_API_KEY = 'AIzaSyAR2UE1z-QAMFgpKZShxeIn8eouefPlcAY'; // Ganti dengan API key Anda
 const TIKTOK_API_KEY = 'key-dmaz'; // Sesuai dengan yang Anda berikan
 
 // Initialize app
