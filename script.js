@@ -6,12 +6,22 @@ const TIKTOK_API_KEY = 'key-dmaz';
 // Chat history
 let chatHistory = [];
 
+// Voice recognition
+let recognition = null;
+let isRecording = false;
+
+// Theme management
+let currentTheme = localStorage.getItem('dmaz-theme') || 'auto';
+
 // Initialize app
 document.addEventListener('DOMContentLoaded', function() {
     initializeFeatureSelector();
     initializeChatInput();
     loadChatHistory();
     updateCharCount();
+    initializeTheme();
+    initializeVoiceRecognition();
+    initializeTouchGestures();
     
     // Load saved chat history
     const savedHistory = localStorage.getItem('dmaz-chat-history');
@@ -834,3 +844,240 @@ window.addEventListener('unhandledrejection', function(e) {
 
 // Initialize tooltips when DOM is ready
 document.addEventListener('DOMContentLoaded', initializeTooltips);
+
+// Theme Management
+function initializeTheme() {
+    const savedTheme = localStorage.getItem('dmaz-theme') || 'auto';
+    applyTheme(savedTheme);
+}
+
+function toggleTheme() {
+    const themes = ['light', 'dark', 'auto'];
+    const currentIndex = themes.indexOf(currentTheme);
+    const nextTheme = themes[(currentIndex + 1) % themes.length];
+    
+    currentTheme = nextTheme;
+    localStorage.setItem('dmaz-theme', nextTheme);
+    applyTheme(nextTheme);
+    
+    showNotification(`Mode ${nextTheme === 'auto' ? 'otomatis' : nextTheme === 'dark' ? 'gelap' : 'terang'} diaktifkan`, 'success');
+}
+
+function applyTheme(theme) {
+    const root = document.documentElement;
+    
+    if (theme === 'auto') {
+        root.removeAttribute('data-theme');
+    } else {
+        root.setAttribute('data-theme', theme);
+    }
+    
+    // Update theme toggle icon
+    const themeIcon = document.querySelector('.theme-toggle i');
+    if (themeIcon) {
+        if (theme === 'dark' || (theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            themeIcon.className = 'fas fa-sun';
+        } else {
+            themeIcon.className = 'fas fa-moon';
+        }
+    }
+}
+
+// Voice Recognition
+function initializeVoiceRecognition() {
+    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        recognition = new SpeechRecognition();
+        
+        recognition.lang = 'id-ID';
+        recognition.continuous = false;
+        recognition.interimResults = false;
+        
+        recognition.onstart = function() {
+            isRecording = true;
+            const voiceBtn = document.getElementById('voiceBtn');
+            if (voiceBtn) {
+                voiceBtn.classList.add('recording');
+                voiceBtn.innerHTML = '<i class="fas fa-stop"></i>';
+            }
+            showNotification('Mendengarkan...', 'info');
+        };
+        
+        recognition.onresult = function(event) {
+            const transcript = event.results[0][0].transcript;
+            const chatInput = document.getElementById('chatInput');
+            if (chatInput) {
+                chatInput.value = transcript;
+                updateCharCount();
+            }
+            showNotification('Pesan berhasil direkam', 'success');
+        };
+        
+        recognition.onerror = function(event) {
+            console.error('Speech recognition error:', event.error);
+            let errorMessage = 'Terjadi kesalahan saat merekam suara';
+            
+            switch(event.error) {
+                case 'no-speech':
+                    errorMessage = 'Tidak ada suara yang terdeteksi';
+                    break;
+                case 'network':
+                    errorMessage = 'Periksa koneksi internet Anda';
+                    break;
+                case 'not-allowed':
+                    errorMessage = 'Akses mikrofon ditolak. Berikan izin untuk menggunakan fitur suara';
+                    break;
+            }
+            
+            showNotification(errorMessage, 'error');
+        };
+        
+        recognition.onend = function() {
+            isRecording = false;
+            const voiceBtn = document.getElementById('voiceBtn');
+            if (voiceBtn) {
+                voiceBtn.classList.remove('recording');
+                voiceBtn.innerHTML = '<i class="fas fa-microphone"></i>';
+            }
+        };
+    } else {
+        console.log('Speech recognition not supported');
+        const voiceBtn = document.getElementById('voiceBtn');
+        if (voiceBtn) {
+            voiceBtn.style.display = 'none';
+        }
+    }
+}
+
+function toggleVoiceInput() {
+    if (!recognition) {
+        showNotification('Fitur suara tidak didukung di browser ini', 'error');
+        return;
+    }
+    
+    if (isRecording) {
+        recognition.stop();
+    } else {
+        recognition.start();
+    }
+}
+
+// Mobile Menu
+function toggleMobileMenu() {
+    // This would open a mobile menu overlay
+    // For now, we'll toggle the feature selector visibility on mobile
+    const featureSelector = document.querySelector('.feature-selector');
+    if (featureSelector) {
+        featureSelector.classList.toggle('mobile-active');
+    }
+}
+
+// Touch Gestures
+function initializeTouchGestures() {
+    let startX = 0;
+    let startY = 0;
+    
+    document.addEventListener('touchstart', function(e) {
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+    }, { passive: true });
+    
+    document.addEventListener('touchend', function(e) {
+        if (!startX || !startY) return;
+        
+        const endX = e.changedTouches[0].clientX;
+        const endY = e.changedTouches[0].clientY;
+        
+        const diffX = startX - endX;
+        const diffY = startY - endY;
+        
+        // Horizontal swipe (threshold: 100px)
+        if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 100) {
+            if (diffX > 0) {
+                // Swipe left - switch to next feature
+                switchToNextFeature();
+            } else {
+                // Swipe right - switch to previous feature
+                switchToPreviousFeature();
+            }
+        }
+        
+        // Reset values
+        startX = 0;
+        startY = 0;
+    }, { passive: true });
+}
+
+function switchToNextFeature() {
+    if (currentFeature === 'chat-ai') {
+        switchFeature('tiktok-downloader');
+    } else {
+        switchFeature('chat-ai');
+    }
+}
+
+function switchToPreviousFeature() {
+    if (currentFeature === 'tiktok-downloader') {
+        switchFeature('chat-ai');
+    } else {
+        switchFeature('tiktok-downloader');
+    }
+}
+
+// Pull to Refresh (for mobile browsers that support it)
+function initializePullToRefresh() {
+    let startY = 0;
+    let currentY = 0;
+    let pullThreshold = 100;
+    
+    document.addEventListener('touchstart', function(e) {
+        if (window.scrollY === 0) {
+            startY = e.touches[0].clientY;
+        }
+    }, { passive: true });
+    
+    document.addEventListener('touchmove', function(e) {
+        if (startY === 0) return;
+        
+        currentY = e.touches[0].clientY;
+        const pullDistance = currentY - startY;
+        
+        if (pullDistance > 0 && window.scrollY === 0) {
+            // Show pull to refresh indicator
+            if (pullDistance > pullThreshold) {
+                // Trigger refresh
+                location.reload();
+            }
+        }
+    }, { passive: true });
+    
+    document.addEventListener('touchend', function() {
+        startY = 0;
+        currentY = 0;
+    }, { passive: true });
+}
+
+// Enhanced keyboard handling for mobile
+document.addEventListener('keydown', function(e) {
+    // Existing keyboard shortcuts...
+    
+    // Mobile-specific enhancements
+    if (e.key === 'Escape') {
+        // Close mobile menu or cancel voice recording
+        if (isRecording) {
+            toggleVoiceInput();
+        }
+    }
+});
+
+// Listen for system theme changes
+if (window.matchMedia) {
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+        if (currentTheme === 'auto') {
+            applyTheme('auto');
+        }
+    });
+}
+
+// Initialize pull to refresh
+document.addEventListener('DOMContentLoaded', initializePullToRefresh);

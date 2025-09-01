@@ -29,6 +29,31 @@
     --radius-2xl: 1.5rem;
 }
 
+/* Dark mode support */
+[data-theme="dark"] {
+    --text-primary: #f9fafb;
+    --text-secondary: #d1d5db;
+    --text-light: #9ca3af;
+    --bg-primary: #111827;
+    --bg-secondary: #1f2937;
+    --bg-tertiary: #374151;
+    --border-color: #374151;
+    --border-light: #4b5563;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+        --text-primary: #f9fafb;
+        --text-secondary: #d1d5db;
+        --text-light: #9ca3af;
+        --bg-primary: #111827;
+        --bg-secondary: #1f2937;
+        --bg-tertiary: #374151;
+        --border-color: #374151;
+        --border-light: #4b5563;
+    }
+}
+
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
@@ -183,6 +208,62 @@ body {
 .header-stats {
     display: flex;
     gap: 24px;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.mobile-menu-toggle {
+    display: none;
+    width: 44px;
+    height: 44px;
+    border: none;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    color: var(--text-secondary);
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    transition: all 0.3s ease;
+}
+
+.mobile-menu-toggle:hover {
+    background: var(--primary-color);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.theme-toggle {
+    width: 44px;
+    height: 44px;
+    border: none;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    color: var(--text-secondary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+    background: var(--primary-color);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+[data-theme="dark"] .theme-toggle i::before {
+    content: "\f185"; /* fa-sun */
 }
 
 .stat-item {
@@ -563,6 +644,7 @@ body {
     gap: 8px;
 }
 
+.voice-btn,
 .emoji-btn {
     width: 32px;
     height: 32px;
@@ -577,9 +659,21 @@ body {
     justify-content: center;
 }
 
+.voice-btn:hover,
 .emoji-btn:hover {
     background: var(--bg-secondary);
     color: var(--primary-color);
+}
+
+.voice-btn.recording {
+    background: var(--secondary-color);
+    color: white;
+    animation: pulse-recording 1s infinite;
+}
+
+@keyframes pulse-recording {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
 }
 
 .send-btn {
@@ -1115,6 +1209,24 @@ body {
         font-size: 2rem;
     }
     
+    .header {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+    }
+    
+    .header-stats {
+        display: none;
+    }
+    
+    .header-actions {
+        justify-content: center;
+    }
+    
+    .mobile-menu-toggle {
+        display: flex;
+    }
+    
     .selector-wrapper {
         grid-template-columns: 1fr;
     }
@@ -1226,6 +1338,78 @@ body {
     background: var(--text-light);
 }
 
+/* Mobile menu overlay styles */
+@media (max-width: 768px) {
+    .feature-selector {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        transform: translateY(-100%);
+        transition: transform 0.3s ease;
+    }
+    
+    .feature-selector.mobile-active {
+        transform: translateY(0);
+    }
+    
+    .mobile-menu-backdrop {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    
+    .mobile-menu-backdrop.active {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+/* Improved touch targets for mobile */
+@media (max-width: 768px) {
+    .feature-btn {
+        min-height: 60px;
+        padding: 16px 20px;
+    }
+    
+    .send-btn {
+        width: 52px;
+        height: 52px;
+    }
+    
+    .voice-btn,
+    .emoji-btn {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .suggestion-chip {
+        min-height: 48px;
+        padding: 12px 20px;
+        font-size: 1rem;
+    }
+    
+    .action-btn {
+        width: 48px;
+        height: 48px;
+    }
+}
+
+/* Focus styles for keyboard navigation */
+button:focus-visible,
+input:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
 /* Accessibility */
 @media (prefers-reduced-motion: reduce) {
     * {
@@ -1235,9 +1419,33 @@ body {
     }
 }
 
-/* Focus styles for keyboard navigation */
-button:focus-visible,
-input:focus-visible {
-    outline: 2px solid var(--primary-color);
-    outline-offset: 2px;
+/* Enhanced mobile scrolling */
+.chat-messages {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+}
+
+/* Better mobile input handling */
+@media (max-width: 768px) {
+    #chatInput {
+        font-size: 16px; /* Prevents zoom on iOS */
     }
+    
+    .input-field {
+        min-height: 48px;
+    }
+    
+    /* iOS specific fixes */
+    input[type="text"],
+    input[type="url"] {
+        -webkit-appearance: none;
+        border-radius: var(--radius-lg);
+    }
+}
+
+/* Vibration feedback for supported devices */
+.feature-btn:active,
+.send-btn:active,
+.voice-btn:active {
+    transform: scale(0.95);
+}
