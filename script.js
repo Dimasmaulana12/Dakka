@@ -118,7 +118,7 @@ async function sendMessage() {
         // Remove typing indicator
         removeTypingIndicator();
         
-        addMessageToChat(response, 'ai');
+        addMessageToChat(response, 'ai', true);
         chatHistory.push({ role: 'ai', content: response, timestamp: new Date().toISOString() });
         
         // Save chat history
@@ -273,7 +273,7 @@ function removeTypingIndicator() {
     }
 }
 
-function addMessageToChat(message, sender) {
+function addMessageToChat(message, sender, useTypingEffect = false) {
     const chatMessages = document.getElementById('chatMessages');
     const messageDiv = document.createElement('div');
     messageDiv.className = `message ${sender}-message`;
@@ -296,7 +296,7 @@ function addMessageToChat(message, sender) {
                 ${avatar}
             </div>
             <div class="message-bubble">
-                <p>${formattedMessage}</p>
+                <p class="message-text">${useTypingEffect && sender === 'ai' ? '' : formattedMessage}</p>
             </div>
         </div>
         <div class="message-time">
@@ -306,6 +306,32 @@ function addMessageToChat(message, sender) {
     
     chatMessages.appendChild(messageDiv);
     chatMessages.scrollTop = chatMessages.scrollHeight;
+    
+    // Add typing effect for AI messages
+    if (useTypingEffect && sender === 'ai') {
+        typeMessage(messageDiv.querySelector('.message-text'), formattedMessage);
+    }
+}
+
+function typeMessage(element, message) {
+    let index = 0;
+    const speed = 30; // milliseconds per character
+    
+    // Add typing indicator
+    element.innerHTML = '<span class="typing-cursor">|</span>';
+    
+    function typeChar() {
+        if (index < message.length) {
+            element.innerHTML = message.substring(0, index + 1) + '<span class="typing-cursor">|</span>';
+            index++;
+            setTimeout(typeChar, speed);
+        } else {
+            // Remove typing cursor when done
+            element.innerHTML = message;
+        }
+    }
+    
+    setTimeout(typeChar, 500); // Small delay before starting
 }
 
 function formatMessage(message) {
