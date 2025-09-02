@@ -6,40 +6,83 @@
     <title>Dmaz Tools - Download TikTok, Facebook & Scribd Gratis</title>
     <meta name="description" content="Dmaz Tools - Platform terlengkap untuk download video TikTok, Facebook, dan dokumen Scribd secara gratis tanpa watermark">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/x-icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iOCIgZmlsbD0iIzAwN0FGRiIvPgo8cGF0aCBkPSJNOCAxMkgyNFYyMEg4VjEyWiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+">
 </head>
 <body>
+    <!-- Background Elements -->
+    <div class="bg-elements">
+        <div class="bg-blur bg-blur-1"></div>
+        <div class="bg-blur bg-blur-2"></div>
+        <div class="bg-blur bg-blur-3"></div>
+    </div>
+
+    <!-- Floating Particles -->
+    <div class="floating-particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
     <!-- Preloader -->
     <div class="preloader" id="preloader">
         <div class="preloader-content">
-            <div class="dmaz-logo">
-                <i class="fas fa-tools"></i>
-                <span>Dmaz Tools</span>
+            <div class="logo-preloader">
+                <div class="logo-icon">
+                    <i class="fas fa-download"></i>
+                </div>
+                <h2>Dmaz Tools</h2>
+                <div class="tagline">Download Platform</div>
             </div>
-            <div class="loading-spinner"></div>
+            <div class="loading-progress">
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+                <div class="loading-text">Loading...</div>
+            </div>
         </div>
     </div>
 
     <!-- Header -->
-    <header class="header">
+    <header class="header" id="header">
         <div class="container">
             <nav class="navbar">
                 <div class="nav-brand">
                     <div class="logo">
-                        <i class="fas fa-tools"></i>
-                        <span>Dmaz Tools</span>
+                        <div class="logo-icon">
+                            <i class="fas fa-download"></i>
+                        </div>
+                        <span class="logo-text">Dmaz Tools</span>
                     </div>
                 </div>
                 
                 <div class="nav-menu" id="nav-menu">
                     <div class="nav-links">
-                        <a href="#home" class="nav-link">Home</a>
-                        <a href="#features" class="nav-link">Features</a>
-                        <a href="#tools" class="nav-link">Tools</a>
-                        <a href="#about" class="nav-link">About</a>
-                        <a href="#contact" class="nav-link">Contact</a>
+                        <a href="#home" class="nav-link active">
+                            <i class="fas fa-home"></i>
+                            <span>Home</span>
+                        </a>
+                        <a href="#features" class="nav-link">
+                            <i class="fas fa-star"></i>
+                            <span>Features</span>
+                        </a>
+                        <a href="#tools" class="nav-link">
+                            <i class="fas fa-tools"></i>
+                            <span>Tools</span>
+                        </a>
+                        <a href="#about" class="nav-link">
+                            <i class="fas fa-info-circle"></i>
+                            <span>About</span>
+                        </a>
+                    </div>
+                    <div class="nav-actions">
+                        <button class="theme-toggle" id="theme-toggle">
+                            <i class="fas fa-moon"></i>
+                        </button>
                     </div>
                 </div>
                 
@@ -55,51 +98,73 @@
     <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="hero-bg">
-            <div class="hero-particles"></div>
+            <div class="hero-gradient"></div>
+            <div class="hero-mesh"></div>
         </div>
         <div class="container">
             <div class="hero-content">
-                <div class="hero-text">
+                <div class="hero-text" data-aos="fade-up">
+                    <div class="hero-badge">
+                        <i class="fas fa-crown"></i>
+                        <span>Platform #1 Indonesia</span>
+                    </div>
                     <h1 class="hero-title">
-                        <span class="gradient-text">Dmaz Tools</span>
-                        <br>Platform Download Terlengkap
+                        Download Content
+                        <span class="gradient-text">Tanpa Batas</span>
+                        <br>dari Platform Favorit
                     </h1>
                     <p class="hero-description">
-                        Download video TikTok, Facebook, dan dokumen Scribd dengan mudah, cepat, dan gratis. 
-                        Tanpa watermark, kualitas HD, dan 100% aman.
+                        Dmaz Tools adalah solusi terlengkap untuk download video TikTok, Facebook, 
+                        dan dokumen Scribd. Gratis, cepat, tanpa watermark, dan berkualitas tinggi.
                     </p>
+                    <div class="hero-actions">
+                        <a href="#tools" class="btn btn-primary">
+                            <i class="fas fa-rocket"></i>
+                            <span>Mulai Download</span>
+                        </a>
+                        <a href="#features" class="btn btn-secondary">
+                            <i class="fas fa-play"></i>
+                            <span>Lihat Demo</span>
+                        </a>
+                    </div>
                     <div class="hero-stats">
                         <div class="stat-item">
-                            <span class="stat-number">1M+</span>
-                            <span class="stat-label">Downloads</span>
+                            <div class="stat-number" data-count="1000000">0</div>
+                            <div class="stat-label">Total Downloads</div>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-number">50K+</span>
-                            <span class="stat-label">Users</span>
+                            <div class="stat-number" data-count="50000">0</div>
+                            <div class="stat-label">Happy Users</div>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-number">3</span>
-                            <span class="stat-label">Platforms</span>
+                            <div class="stat-number" data-count="3">0</div>
+                            <div class="stat-label">Platforms</div>
                         </div>
                     </div>
                 </div>
-                <div class="hero-visual">
-                    <div class="floating-card">
-                        <div class="card-header">
-                            <div class="card-dots">
-                                <span></span><span></span><span></span>
+                <div class="hero-visual" data-aos="fade-left">
+                    <div class="hero-mockup">
+                        <div class="mockup-browser">
+                            <div class="browser-header">
+                                <div class="browser-dots">
+                                    <span></span><span></span><span></span>
+                                </div>
+                                <div class="browser-url">dmaz-tools.com</div>
                             </div>
-                        </div>
-                        <div class="card-content">
-                            <div class="platform-icons">
-                                <div class="platform-icon tiktok">
-                                    <i class="fab fa-tiktok"></i>
-                                </div>
-                                <div class="platform-icon facebook">
-                                    <i class="fab fa-facebook"></i>
-                                </div>
-                                <div class="platform-icon scribd">
-                                    <i class="fas fa-file-pdf"></i>
+                            <div class="browser-content">
+                                <div class="mockup-platforms">
+                                    <div class="platform-preview tiktok-preview">
+                                        <i class="fab fa-tiktok"></i>
+                                        <span>TikTok</span>
+                                    </div>
+                                    <div class="platform-preview facebook-preview">
+                                        <i class="fab fa-facebook"></i>
+                                        <span>Facebook</span>
+                                    </div>
+                                    <div class="platform-preview scribd-preview">
+                                        <i class="fas fa-file-pdf"></i>
+                                        <span>Scribd</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -112,133 +177,214 @@
     <!-- Platform Selection -->
     <section class="platform-selection" id="tools">
         <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Pilih Platform</h2>
-                <p class="section-description">Pilih platform yang ingin Anda gunakan untuk download</p>
+            <div class="section-header" data-aos="fade-up">
+                <div class="section-badge">
+                    <i class="fas fa-download"></i>
+                    <span>Download Tools</span>
+                </div>
+                <h2 class="section-title">Pilih Platform Favorit Anda</h2>
+                <p class="section-description">
+                    Dapatkan video dan dokumen berkualitas tinggi dari platform media sosial terpopuler
+                </p>
             </div>
             
-            <div class="platform-tabs">
+            <div class="platform-tabs" data-aos="fade-up" data-aos-delay="200">
                 <button class="platform-tab active" data-platform="tiktok">
-                    <i class="fab fa-tiktok"></i>
-                    <span>TikTok</span>
+                    <div class="tab-icon tiktok-icon">
+                        <i class="fab fa-tiktok"></i>
+                    </div>
+                    <div class="tab-content">
+                        <h3>TikTok</h3>
+                        <p>Video HD tanpa watermark</p>
+                    </div>
+                    <div class="tab-indicator"></div>
                 </button>
                 <button class="platform-tab" data-platform="facebook">
-                    <i class="fab fa-facebook"></i>
-                    <span>Facebook</span>
+                    <div class="tab-icon facebook-icon">
+                        <i class="fab fa-facebook"></i>
+                    </div>
+                    <div class="tab-content">
+                        <h3>Facebook</h3>
+                        <p>Video & audio berkualitas</p>
+                    </div>
+                    <div class="tab-indicator"></div>
                 </button>
                 <button class="platform-tab" data-platform="scribd">
-                    <i class="fas fa-file-pdf"></i>
-                    <span>Scribd</span>
+                    <div class="tab-icon scribd-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <div class="tab-content">
+                        <h3>Scribd</h3>
+                        <p>Dokumen PDF lengkap</p>
+                    </div>
+                    <div class="tab-indicator"></div>
                 </button>
             </div>
 
-            <!-- TikTok Downloader -->
-            <div class="platform-content active" id="tiktok-content">
-                <div class="download-section">
+            <!-- Platform Contents -->
+            <div class="platform-contents">
+                <!-- TikTok Downloader -->
+                <div class="platform-content active" id="tiktok-content" data-aos="fade-up" data-aos-delay="400">
                     <div class="download-card">
+                        <div class="card-glow"></div>
                         <div class="card-header">
                             <div class="platform-info">
-                                <div class="platform-icon-large tiktok">
+                                <div class="platform-icon-large tiktok-large">
                                     <i class="fab fa-tiktok"></i>
                                 </div>
                                 <div class="platform-details">
-                                    <h3>TikTok Downloader</h3>
-                                    <p>Download video TikTok tanpa watermark dalam kualitas HD</p>
+                                    <h3>TikTok Video Downloader</h3>
+                                    <p>Download video TikTok tanpa watermark dalam kualitas HD dan audio MP3</p>
+                                    <div class="features-list">
+                                        <span class="feature-item">
+                                            <i class="fas fa-check"></i>
+                                            Tanpa Watermark
+                                        </span>
+                                        <span class="feature-item">
+                                            <i class="fas fa-check"></i>
+                                            Kualitas HD
+                                        </span>
+                                        <span class="feature-item">
+                                            <i class="fas fa-check"></i>
+                                            Audio MP3
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         
                         <div class="download-form">
                             <div class="input-container">
-                                <div class="input-group">
+                                <div class="input-group modern-input">
                                     <div class="input-icon">
                                         <i class="fas fa-link"></i>
                                     </div>
-                                    <input type="url" id="tiktok-url" placeholder="Paste link TikTok disini..." class="url-input">
+                                    <input type="url" id="tiktok-url" placeholder="Paste URL TikTok disini..." class="url-input">
                                     <button type="button" id="tiktok-download-btn" class="download-btn">
-                                        <i class="fas fa-download"></i>
-                                        <span>Download</span>
+                                        <div class="btn-content">
+                                            <i class="fas fa-download"></i>
+                                            <span>Download</span>
+                                        </div>
+                                        <div class="btn-loading">
+                                            <div class="spinner"></div>
+                                        </div>
                                     </button>
                                 </div>
                                 <div class="input-help">
-                                    <i class="fas fa-info-circle"></i>
-                                    <span>Contoh: https://vt.tiktok.com/ZSY8XguF2/</span>
+                                    <i class="fas fa-lightbulb"></i>
+                                    <span>Contoh: https://vt.tiktok.com/ZSY8XguF2/ atau https://www.tiktok.com/@username/video/123456</span>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Facebook Downloader -->
-            <div class="platform-content" id="facebook-content">
-                <div class="download-section">
+                <!-- Facebook Downloader -->
+                <div class="platform-content" id="facebook-content" data-aos="fade-up" data-aos-delay="400">
                     <div class="download-card">
+                        <div class="card-glow"></div>
                         <div class="card-header">
                             <div class="platform-info">
-                                <div class="platform-icon-large facebook">
+                                <div class="platform-icon-large facebook-large">
                                     <i class="fab fa-facebook"></i>
                                 </div>
                                 <div class="platform-details">
-                                    <h3>Facebook Downloader</h3>
-                                    <p>Download video Facebook dalam kualitas HD dan SD</p>
+                                    <h3>Facebook Video Downloader</h3>
+                                    <p>Download video Facebook dalam berbagai kualitas HD dan SD</p>
+                                    <div class="features-list">
+                                        <span class="feature-item">
+                                            <i class="fas fa-check"></i>
+                                            Kualitas HD & SD
+                                        </span>
+                                        <span class="feature-item">
+                                            <i class="fas fa-check"></i>
+                                            Private Video
+                                        </span>
+                                        <span class="feature-item">
+                                            <i class="fas fa-check"></i>
+                                            Fast Download
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         
                         <div class="download-form">
                             <div class="input-container">
-                                <div class="input-group">
+                                <div class="input-group modern-input">
                                     <div class="input-icon">
                                         <i class="fas fa-link"></i>
                                     </div>
-                                    <input type="url" id="facebook-url" placeholder="Paste link Facebook disini..." class="url-input">
+                                    <input type="url" id="facebook-url" placeholder="Paste URL Facebook disini..." class="url-input">
                                     <button type="button" id="facebook-download-btn" class="download-btn">
-                                        <i class="fas fa-download"></i>
-                                        <span>Download</span>
+                                        <div class="btn-content">
+                                            <i class="fas fa-download"></i>
+                                            <span>Download</span>
+                                        </div>
+                                        <div class="btn-loading">
+                                            <div class="spinner"></div>
+                                        </div>
                                     </button>
                                 </div>
                                 <div class="input-help">
-                                    <i class="fas fa-info-circle"></i>
-                                    <span>Contoh: https://www.facebook.com/share/video/123456789/</span>
+                                    <i class="fas fa-lightbulb"></i>
+                                    <span>Contoh: https://www.facebook.com/watch/?v=123456789 atau https://fb.watch/abc123/</span>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Scribd Downloader -->
-            <div class="platform-content" id="scribd-content">
-                <div class="download-section">
+                <!-- Scribd Downloader -->
+                <div class="platform-content" id="scribd-content" data-aos="fade-up" data-aos-delay="400">
                     <div class="download-card">
+                        <div class="card-glow"></div>
                         <div class="card-header">
                             <div class="platform-info">
-                                <div class="platform-icon-large scribd">
+                                <div class="platform-icon-large scribd-large">
                                     <i class="fas fa-file-pdf"></i>
                                 </div>
                                 <div class="platform-details">
-                                    <h3>Scribd Downloader</h3>
-                                    <p>Download dokumen Scribd dalam format PDF</p>
+                                    <h3>Scribd Document Downloader</h3>
+                                    <p>Download dokumen Scribd dalam format PDF berkualitas tinggi</p>
+                                    <div class="features-list">
+                                        <span class="feature-item">
+                                            <i class="fas fa-check"></i>
+                                            Format PDF
+                                        </span>
+                                        <span class="feature-item">
+                                            <i class="fas fa-check"></i>
+                                            Full Document
+                                        </span>
+                                        <span class="feature-item">
+                                            <i class="fas fa-check"></i>
+                                            High Quality
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         
                         <div class="download-form">
                             <div class="input-container">
-                                <div class="input-group">
+                                <div class="input-group modern-input">
                                     <div class="input-icon">
                                         <i class="fas fa-link"></i>
                                     </div>
-                                    <input type="url" id="scribd-url" placeholder="Paste link Scribd disini..." class="url-input">
+                                    <input type="url" id="scribd-url" placeholder="Paste URL Scribd disini..." class="url-input">
                                     <button type="button" id="scribd-download-btn" class="download-btn">
-                                        <i class="fas fa-download"></i>
-                                        <span>Download</span>
+                                        <div class="btn-content">
+                                            <i class="fas fa-download"></i>
+                                            <span>Download</span>
+                                        </div>
+                                        <div class="btn-loading">
+                                            <div class="spinner"></div>
+                                        </div>
                                     </button>
                                 </div>
                                 <div class="input-help">
-                                    <i class="fas fa-info-circle"></i>
-                                    <span>Contoh: https://id.scribd.com/document/438365833/TUGAS-KLIPING</span>
+                                    <i class="fas fa-lightbulb"></i>
+                                    <span>Contoh: https://id.scribd.com/document/123456789/Document-Name</span>
                                 </div>
                             </div>
                         </div>
@@ -248,12 +394,32 @@
         </div>
     </section>
 
-    <!-- Loading Animation -->
+    <!-- Loading Overlay -->
     <div class="loading-overlay" id="loading-overlay">
         <div class="loading-content">
-            <div class="loading-spinner-large"></div>
+            <div class="loading-animation">
+                <div class="loading-circle">
+                    <div class="circle-1"></div>
+                    <div class="circle-2"></div>
+                    <div class="circle-3"></div>
+                </div>
+            </div>
             <h3 id="loading-text">Memproses permintaan...</h3>
             <p id="loading-description">Mohon tunggu sebentar</p>
+            <div class="loading-steps">
+                <div class="step-item active">
+                    <i class="fas fa-link"></i>
+                    <span>Menganalisis URL</span>
+                </div>
+                <div class="step-item">
+                    <i class="fas fa-cog"></i>
+                    <span>Memproses data</span>
+                </div>
+                <div class="step-item">
+                    <i class="fas fa-download"></i>
+                    <span>Menyiapkan download</span>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -269,58 +435,76 @@
     <!-- Features Section -->
     <section class="features" id="features">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header" data-aos="fade-up">
+                <div class="section-badge">
+                    <i class="fas fa-star"></i>
+                    <span>Fitur Unggulan</span>
+                </div>
                 <h2 class="section-title">Mengapa Memilih Dmaz Tools?</h2>
-                <p class="section-description">Platform terpercaya dengan fitur lengkap dan kualitas terbaik</p>
+                <p class="section-description">
+                    Nikmati pengalaman download terbaik dengan fitur-fitur canggih yang kami tawarkan
+                </p>
             </div>
             
             <div class="features-grid">
-                <div class="feature-card">
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-glow"></div>
                     <div class="feature-icon">
-                        <i class="fas fa-rocket"></i>
+                        <i class="fas fa-bolt"></i>
                     </div>
                     <h3>Super Cepat</h3>
-                    <p>Download dengan kecepatan tinggi dalam hitungan detik</p>
+                    <p>Download dengan kecepatan tinggi menggunakan teknologi terdepan</p>
+                    <div class="feature-highlight">99.9% Uptime</div>
                 </div>
                 
-                <div class="feature-card">
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-glow"></div>
                     <div class="feature-icon">
                         <i class="fas fa-shield-alt"></i>
                     </div>
                     <h3>100% Aman</h3>
-                    <p>Tidak ada malware atau virus. Sangat aman digunakan</p>
+                    <p>Keamanan terjamin tanpa malware atau virus berbahaya</p>
+                    <div class="feature-highlight">SSL Secured</div>
                 </div>
                 
-                <div class="feature-card">
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-glow"></div>
                     <div class="feature-icon">
                         <i class="fas fa-mobile-alt"></i>
                     </div>
                     <h3>Multi Platform</h3>
-                    <p>Bisa digunakan di semua perangkat dan browser</p>
+                    <p>Kompatibel dengan semua perangkat dan sistem operasi</p>
+                    <div class="feature-highlight">Cross Platform</div>
                 </div>
                 
-                <div class="feature-card">
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="feature-glow"></div>
                     <div class="feature-icon">
-                        <i class="fas fa-gem"></i>
+                        <i class="fas fa-hd-video"></i>
                     </div>
                     <h3>Kualitas HD</h3>
-                    <p>Download video dalam kualitas tertinggi yang tersedia</p>
+                    <p>Download video dalam resolusi tertinggi yang tersedia</p>
+                    <div class="feature-highlight">Up to 4K</div>
                 </div>
                 
-                <div class="feature-card">
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="500">
+                    <div class="feature-glow"></div>
                     <div class="feature-icon">
-                        <i class="fas fa-ban"></i>
+                        <i class="fas fa-magic"></i>
                     </div>
                     <h3>Tanpa Watermark</h3>
-                    <p>Video yang didownload bebas dari watermark</p>
+                    <p>Video bersih tanpa logo atau watermark mengganggu</p>
+                    <div class="feature-highlight">Clean Video</div>
                 </div>
                 
-                <div class="feature-card">
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="600">
+                    <div class="feature-glow"></div>
                     <div class="feature-icon">
-                        <i class="fas fa-gift"></i>
+                        <i class="fas fa-infinity"></i>
                     </div>
-                    <h3>Gratis Selamanya</h3>
-                    <p>Tidak ada biaya tersembunyi atau batasan</p>
+                    <h3>Unlimited</h3>
+                    <p>Download tanpa batas untuk semua jenis konten</p>
+                    <div class="feature-highlight">No Limits</div>
                 </div>
             </div>
         </div>
@@ -329,37 +513,60 @@
     <!-- How to Use Section -->
     <section class="how-to-use" id="about">
         <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Cara Menggunakan</h2>
-                <p class="section-description">Mudah digunakan dalam 3 langkah sederhana</p>
+            <div class="section-header" data-aos="fade-up">
+                <div class="section-badge">
+                    <i class="fas fa-question-circle"></i>
+                    <span>Cara Penggunaan</span>
+                </div>
+                <h2 class="section-title">Mudah Dalam 3 Langkah</h2>
+                <p class="section-description">
+                    Proses download yang sangat sederhana dan user-friendly
+                </p>
             </div>
             
             <div class="steps-container">
-                <div class="step">
-                    <div class="step-number">1</div>
+                <div class="step" data-aos="fade-up" data-aos-delay="100">
+                    <div class="step-icon">
+                        <i class="fas fa-copy"></i>
+                        <div class="step-number">1</div>
+                    </div>
                     <div class="step-content">
-                        <h3>Copy Link</h3>
-                        <p>Salin link video atau dokumen yang ingin Anda download dari platform yang dipilih</p>
+                        <h3>Copy URL</h3>
+                        <p>Salin link video atau dokumen dari platform pilihan Anda</p>
                     </div>
                 </div>
                 
-                <div class="step-connector"></div>
+                <div class="step-connector" data-aos="fade-up" data-aos-delay="200">
+                    <div class="connector-line">
+                        <div class="connector-flow"></div>
+                    </div>
+                </div>
                 
-                <div class="step">
-                    <div class="step-number">2</div>
+                <div class="step" data-aos="fade-up" data-aos-delay="300">
+                    <div class="step-icon">
+                        <i class="fas fa-paste"></i>
+                        <div class="step-number">2</div>
+                    </div>
                     <div class="step-content">
                         <h3>Paste & Process</h3>
-                        <p>Paste link ke dalam kolom input dan klik tombol download</p>
+                        <p>Tempel link di kolom input dan klik tombol download</p>
                     </div>
                 </div>
                 
-                <div class="step-connector"></div>
+                <div class="step-connector" data-aos="fade-up" data-aos-delay="400">
+                    <div class="connector-line">
+                        <div class="connector-flow"></div>
+                    </div>
+                </div>
                 
-                <div class="step">
-                    <div class="step-number">3</div>
+                <div class="step" data-aos="fade-up" data-aos-delay="500">
+                    <div class="step-icon">
+                        <i class="fas fa-download"></i>
+                        <div class="step-number">3</div>
+                    </div>
                     <div class="step-content">
                         <h3>Download</h3>
-                        <p>Pilih kualitas yang diinginkan dan download file secara gratis</p>
+                        <p>Pilih kualitas dan download file secara gratis dan cepat</p>
                     </div>
                 </div>
             </div>
@@ -367,26 +574,43 @@
     </section>
 
     <!-- Footer -->
-    <footer class="footer" id="contact">
+    <footer class="footer">
+        <div class="footer-bg">
+            <div class="footer-gradient"></div>
+        </div>
         <div class="container">
             <div class="footer-content">
-                <div class="footer-section">
-                    <div class="footer-brand">
-                        <div class="logo">
-                            <i class="fas fa-tools"></i>
-                            <span>Dmaz Tools</span>
+                <div class="footer-brand" data-aos="fade-up">
+                    <div class="logo">
+                        <div class="logo-icon">
+                            <i class="fas fa-download"></i>
                         </div>
-                        <p>Platform download terlengkap untuk TikTok, Facebook, dan Scribd. Gratis, cepat, dan aman.</p>
-                        <div class="social-links">
-                            <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
-                            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                            <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
-                        </div>
+                        <span class="logo-text">Dmaz Tools</span>
+                    </div>
+                    <p class="footer-description">
+                        Platform download terlengkap dan terpercaya untuk berbagai platform media sosial. 
+                        Gratis, cepat, dan berkualitas tinggi.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-github"></i>
+                        </a>
                     </div>
                 </div>
                 
-                <div class="footer-section">
+                <div class="footer-section" data-aos="fade-up" data-aos-delay="100">
                     <h4>Quick Links</h4>
                     <ul>
                         <li><a href="#home">Home</a></li>
@@ -396,16 +620,17 @@
                     </ul>
                 </div>
                 
-                <div class="footer-section">
-                    <h4>Tools</h4>
+                <div class="footer-section" data-aos="fade-up" data-aos-delay="200">
+                    <h4>Download Tools</h4>
                     <ul>
                         <li><a href="#" data-platform="tiktok">TikTok Downloader</a></li>
                         <li><a href="#" data-platform="facebook">Facebook Downloader</a></li>
                         <li><a href="#" data-platform="scribd">Scribd Downloader</a></li>
+                        <li><a href="#">Coming Soon...</a></li>
                     </ul>
                 </div>
                 
-                <div class="footer-section">
+                <div class="footer-section" data-aos="fade-up" data-aos-delay="300">
                     <h4>Support</h4>
                     <ul>
                         <li><a href="#">FAQ</a></li>
@@ -416,20 +641,25 @@
                 </div>
             </div>
             
-            <div class="footer-bottom">
-                <p>&copy; 2024 Dmaz Tools. All rights reserved. Made with ❤️ by Dmaz</p>
+            <div class="footer-bottom" data-aos="fade-up" data-aos-delay="400">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2024 Dmaz Tools. All rights reserved.</p>
+                    <p>Made with <i class="fas fa-heart"></i> by <strong>Dmaz</strong></p>
+                </div>
             </div>
         </div>
     </footer>
 
-    <!-- Toast Notification -->
-    <div class="toast" id="toast">
-        <div class="toast-content">
-            <i class="toast-icon"></i>
-            <span class="toast-message"></span>
-        </div>
+    <!-- Toast Notifications -->
+    <div class="toast-container" id="toast-container">
+        <!-- Toasts will be dynamically added here -->
     </div>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
     <script src="script.js"></script>
 </body>
-        </html>
+    </html>
