@@ -229,173 +229,288 @@ async function downloadScribd(url) {
     }
 }
 
-// Display Result Functions
+// Result Display Functions
 function displayTikTokResult(data) {
+    // Extract video information
+    const videoInfo = {
+        title: data.title || 'Video TikTok',
+        author: data.author || {},
+        thumbnail: data.cover || data.wmplay || 'https://via.placeholder.com/200x250?text=TikTok+Video',
+        stats: {
+            playCount: data.play_count || 0,
+            shareCount: data.share_count || 0,
+            downloadCount: data.download_count || 0
+        }
+    };
+
+    // Build download options
+    let downloadOptions = '';
+
+    // Video without watermark (priority)
+    if (data.play) {
+        downloadOptions += `
+            <div class="option-card">
+                <div class="option-info">
+                    <h4><i class="fas fa-video"></i> Video HD (Tanpa Watermark)</h4>
+                    <p>Kualitas terbaik tanpa watermark TikTok</p>
+                    <span class="file-size">MP4 - HD</span>
+                </div>
+                <button class="download-option-btn" onclick="downloadFile('${data.play}', 'tiktok-video-hd.mp4')">
+                    <i class="fas fa-download"></i>
+                    Download Video HD
+                </button>
+            </div>
+        `;
+    }
+
+    // Video with watermark (alternative)
+    if (data.wmplay) {
+        downloadOptions += `
+            <div class="option-card">
+                <div class="option-info">
+                    <h4><i class="fas fa-video"></i> Video (Dengan Watermark)</h4>
+                    <p>Video dengan watermark TikTok</p>
+                    <span class="file-size">MP4 - Original</span>
+                </div>
+                <button class="download-option-btn" onclick="downloadFile('${data.wmplay}', 'tiktok-video-wm.mp4')">
+                    <i class="fas fa-download"></i>
+                    Download Video
+                </button>
+            </div>
+        `;
+    }
+
+    // HD Video (if available)
+    if (data.hdplay && data.hdplay !== data.play) {
+        downloadOptions += `
+            <div class="option-card">
+                <div class="option-info">
+                    <h4><i class="fas fa-video"></i> Video HD</h4>
+                    <p>Video kualitas HD tanpa watermark</p>
+                    <span class="file-size">MP4 - HD</span>
+                </div>
+                <button class="download-option-btn" onclick="downloadFile('${data.hdplay}', 'tiktok-video-hd.mp4')">
+                    <i class="fas fa-download"></i>
+                    Download HD
+                </button>
+            </div>
+        `;
+    }
+
+    // Audio option
+    if (data.music || data.music_info?.play) {
+        const audioUrl = data.music || data.music_info?.play;
+        downloadOptions += `
+            <div class="option-card">
+                <div class="option-info">
+                    <h4><i class="fas fa-music"></i> Audio (MP3)</h4>
+                    <p>Ekstrak audio dari video TikTok</p>
+                    <span class="file-size">MP3 - Audio</span>
+                </div>
+                <button class="download-option-btn" onclick="downloadFile('${audioUrl}', 'tiktok-audio.mp3')">
+                    <i class="fas fa-download"></i>
+                    Download Audio
+                </button>
+            </div>
+        `;
+    }
+
+    // If no specific video URLs, try using any available video URL
+    if (!data.play && !data.wmplay && !data.hdplay) {
+        // Check for other possible video URL properties
+        const possibleVideoUrls = [
+            data.video_url,
+            data.url,
+            data.download_url,
+            data.no_watermark,
+            data.watermark
+        ].filter(url => url);
+
+        possibleVideoUrls.forEach((url, index) => {
+            downloadOptions += `
+                <div class="option-card">
+                    <div class="option-info">
+                        <h4><i class="fas fa-video"></i> Video ${index + 1}</h4>
+                        <p>Download video TikTok</p>
+                        <span class="file-size">MP4</span>
+                    </div>
+                    <button class="download-option-btn" onclick="downloadFile('${url}', 'tiktok-video-${index + 1}.mp4')">
+                        <i class="fas fa-download"></i>
+                        Download Video
+                    </button>
+                </div>
+            `;
+        });
+    }
+
     const resultHTML = `
         <div class="result-card">
             <div class="video-info">
                 <div class="video-thumbnail">
-                    <img src="${data.cover || '/api/placeholder/200/250'}" alt="Video Thumbnail" onerror="this.src='/api/placeholder/200/250'">
+                    <img src="${videoInfo.thumbnail}" alt="Video Thumbnail" onerror="this.src='https://via.placeholder.com/200x250?text=TikTok+Video'">
                     <div class="play-button">
                         <i class="fas fa-play"></i>
                     </div>
                 </div>
                 <div class="video-details">
-                    <h3>${data.title || 'Video TikTok'}</h3>
+                    <h3>${videoInfo.title}</h3>
                     <div class="video-stats">
-                        <span><i class="fas fa-eye"></i> ${formatNumber(data.play_count || 0)} views</span>
-                        <span><i class="fas fa-heart"></i> ${formatNumber(data.digg_count || 0)} likes</span>
-                        <span><i class="fas fa-share"></i> ${formatNumber(data.share_count || 0)} shares</span>
-                        <span><i class="fas fa-clock"></i> ${data.duration || 'N/A'}s</span>
+                        <span><i class="fas fa-eye"></i> ${formatNumber(videoInfo.stats.playCount)} views</span>
+                        <span><i class="fas fa-share"></i> ${formatNumber(videoInfo.stats.shareCount)} shares</span>
+                        <span><i class="fas fa-download"></i> ${formatNumber(videoInfo.stats.downloadCount)} downloads</span>
                     </div>
                     <div class="author-info">
-                        <img src="${data.author?.avatar || '/api/placeholder/50/50'}" alt="Author" onerror="this.src='/api/placeholder/50/50'">
+                        <img src="${videoInfo.author.avatar || 'https://via.placeholder.com/50x50?text=User'}" alt="Author" onerror="this.src='https://via.placeholder.com/50x50?text=User'">
                         <div>
-                            <p class="author-name">@${data.author?.unique_id || 'Unknown'}</p>
-                            <p class="author-nickname">${data.author?.nickname || 'TikTok User'}</p>
+                            <p class="author-name">@${videoInfo.author.unique_id || videoInfo.author.username || 'Unknown'}</p>
+                            <p class="author-nickname">${videoInfo.author.nickname || videoInfo.author.name || 'TikTok User'}</p>
                         </div>
                     </div>
                 </div>
             </div>
             
             <div class="download-options">
-                ${data.video ? `
-                <div class="option-card">
-                    <div class="option-info">
-                        <h4><i class="fas fa-video"></i> Video HD (MP4)</h4>
-                        <p>Download video TikTok dalam kualitas HD tanpa watermark</p>
-                        <span class="file-size">HD Quality</span>
+                ${downloadOptions || `
+                    <div class="option-card">
+                        <div class="option-info">
+                            <h4><i class="fas fa-exclamation-triangle"></i> Tidak Ada Opsi Download</h4>
+                            <p>Maaf, tidak dapat menemukan link download untuk video ini</p>
+                        </div>
                     </div>
-                    <button class="download-option-btn" onclick="window.open('${data.video}', '_blank')">
-                        <i class="fas fa-download"></i>
-                        Download Video
-                    </button>
-                </div>` : ''}
-                
-                ${data.video_hd ? `
-                <div class="option-card">
-                    <div class="option-info">
-                        <h4><i class="fas fa-video"></i> Video HD+ (MP4)</h4>
-                        <p>Download video TikTok dalam kualitas tertinggi</p>
-                        <span class="file-size">Best Quality</span>
-                    </div>
-                    <button class="download-option-btn" onclick="window.open('${data.video_hd}', '_blank')">
-                        <i class="fas fa-download"></i>
-                        Download HD+
-                    </button>
-                </div>` : ''}
-                
-                ${data.music ? `
-                <div class="option-card">
-                    <div class="option-info">
-                        <h4><i class="fas fa-music"></i> Audio (MP3)</h4>
-                        <p>Download audio/musik dari video TikTok</p>
-                        <span class="file-size">Audio Only</span>
-                    </div>
-                    <button class="download-option-btn" onclick="window.open('${data.music}', '_blank')">
-                        <i class="fas fa-download"></i>
-                        Download Audio
-                    </button>
-                </div>` : ''}
+                `}
             </div>
         </div>
     `;
-    
-    showResults(resultHTML);
+
+    resultContent.innerHTML = resultHTML;
+    showResults();
 }
 
 function displayFacebookResult(data) {
+    const videoInfo = {
+        title: data.title || 'Video Facebook',
+        thumbnail: data.thumbnail || 'https://via.placeholder.com/200x250?text=Facebook+Video'
+    };
+
+    let downloadOptions = '';
+
+    // HD Video
+    if (data.hd) {
+        downloadOptions += `
+            <div class="option-card">
+                <div class="option-info">
+                    <h4><i class="fas fa-video"></i> Video HD</h4>
+                    <p>Download video Facebook kualitas HD</p>
+                    <span class="file-size">MP4 - HD</span>
+                </div>
+                <button class="download-option-btn" onclick="downloadFile('${data.hd}', 'facebook-video-hd.mp4')">
+                    <i class="fas fa-download"></i>
+                    Download HD
+                </button>
+            </div>
+        `;
+    }
+
+    // SD Video
+    if (data.sd) {
+        downloadOptions += `
+            <div class="option-card">
+                <div class="option-info">
+                    <h4><i class="fas fa-video"></i> Video SD</h4>
+                    <p>Download video Facebook kualitas SD</p>
+                    <span class="file-size">MP4 - SD</span>
+                </div>
+                <button class="download-option-btn" onclick="downloadFile('${data.sd}', 'facebook-video-sd.mp4')">
+                    <i class="fas fa-download"></i>
+                    Download SD
+                </button>
+            </div>
+        `;
+    }
+
     const resultHTML = `
         <div class="result-card">
             <div class="video-info">
                 <div class="video-thumbnail">
-                    <img src="/api/placeholder/200/250" alt="Facebook Video">
+                    <img src="${videoInfo.thumbnail}" alt="Video Thumbnail" onerror="this.src='https://via.placeholder.com/200x250?text=Facebook+Video'">
                     <div class="play-button">
-                        <i class="fab fa-facebook"></i>
+                        <i class="fas fa-play"></i>
                     </div>
                 </div>
                 <div class="video-details">
-                    <h3>${data.title || 'Video Facebook'}</h3>
+                    <h3>${videoInfo.title}</h3>
                     <div class="video-stats">
-                        <span><i class="fas fa-link"></i> Facebook Video</span>
-                        <span><i class="fas fa-clock"></i> Ready to download</span>
-                    </div>
-                    <div class="author-info">
-                        <img src="/api/placeholder/50/50" alt="Facebook">
-                        <div>
-                            <p class="author-name">Facebook Video</p>
-                            <p class="author-nickname">Social Media Content</p>
-                        </div>
+                        <span><i class="fab fa-facebook"></i> Facebook Video</span>
                     </div>
                 </div>
             </div>
             
             <div class="download-options">
-                ${data.hd ? `
-                <div class="option-card">
-                    <div class="option-info">
-                        <h4><i class="fas fa-video"></i> Video HD (MP4)</h4>
-                        <p>Download video Facebook dalam kualitas HD</p>
-                        <span class="file-size">HD Quality</span>
-                    </div>
-                    <button class="download-option-btn" onclick="window.open('${data.hd}', '_blank')">
-                        <i class="fas fa-download"></i>
-                        Download HD
-                    </button>
-                </div>` : ''}
-                
-                ${data.sd ? `
-                <div class="option-card">
-                    <div class="option-info">
-                        <h4><i class="fas fa-video"></i> Video SD (MP4)</h4>
-                        <p>Download video Facebook dalam kualitas standar</p>
-                        <span class="file-size">SD Quality</span>
-                    </div>
-                    <button class="download-option-btn" onclick="window.open('${data.sd}', '_blank')">
-                        <i class="fas fa-download"></i>
-                        Download SD
-                    </button>
-                </div>` : ''}
+                ${downloadOptions}
             </div>
         </div>
     `;
-    
-    showResults(resultHTML);
+
+    resultContent.innerHTML = resultHTML;
+    showResults();
 }
 
 function displayScribdResult(downloadUrl, originalUrl) {
-    const fileName = extractFileNameFromUrl(originalUrl);
+    const fileName = extractFileNameFromUrl(originalUrl) || 'document';
+    
     const resultHTML = `
-        <div class="result-card">
-            <div class="scribd-result">
-                <div class="file-icon">
-                    <i class="fas fa-file-pdf"></i>
-                </div>
-                <h3>${fileName}</h3>
-                <p>Dokumen Scribd berhasil diproses dan siap untuk didownload dalam format PDF</p>
-                
-                <div class="download-options">
-                    <div class="option-card">
-                        <div class="option-info">
-                            <h4><i class="fas fa-file-pdf"></i> PDF Document</h4>
-                            <p>Download dokumen Scribd dalam format PDF</p>
-                            <span class="file-size">PDF Format</span>
-                        </div>
-                        <button class="download-option-btn" onclick="window.open('${downloadUrl}', '_blank')">
-                            <i class="fas fa-download"></i>
-                            Download PDF
-                        </button>
+        <div class="result-card scribd-result">
+            <div class="file-icon">
+                <i class="fas fa-file-pdf"></i>
+            </div>
+            <h3>Dokumen Scribd Siap Diunduh</h3>
+            <p>Dokumen telah berhasil diproses dan siap untuk diunduh dalam format PDF.</p>
+            
+            <div class="download-options">
+                <div class="option-card">
+                    <div class="option-info">
+                        <h4><i class="fas fa-file-pdf"></i> Dokumen PDF</h4>
+                        <p>Download dokumen Scribd dalam format PDF</p>
+                        <span class="file-size">PDF</span>
                     </div>
+                    <button class="download-option-btn" onclick="downloadFile('${downloadUrl}', '${fileName}.pdf')">
+                        <i class="fas fa-download"></i>
+                        Download PDF
+                    </button>
                 </div>
             </div>
         </div>
     `;
-    
-    showResults(resultHTML);
+
+    resultContent.innerHTML = resultHTML;
+    showResults();
 }
 
 // Utility Functions
+function downloadFile(url, filename) {
+    // Show download starting toast
+    showToast('success', 'Download dimulai...');
+    
+    // Create temporary link and trigger download
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = filename;
+    link.target = '_blank';
+    
+    // Add to DOM, click, and remove
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+    // Show completion toast after a delay
+    setTimeout(() => {
+        showToast('success', 'File berhasil diunduh!');
+    }, 1000);
+}
+
 function formatNumber(num) {
+    if (!num) return '0';
+    
     if (num >= 1000000) {
         return (num / 1000000).toFixed(1) + 'M';
     } else if (num >= 1000) {
@@ -406,12 +521,11 @@ function formatNumber(num) {
 
 function extractFileNameFromUrl(url) {
     try {
-        const urlParts = url.split('/');
-        const lastPart = urlParts[urlParts.length - 1];
-        const fileName = lastPart.split('-').slice(1).join('-') || 'Dokumen Scribd';
-        return decodeURIComponent(fileName);
-    } catch (error) {
-        return 'Dokumen Scribd';
+        const urlPath = new URL(url).pathname;
+        const segments = urlPath.split('/');
+        return segments[segments.length - 1] || 'document';
+    } catch {
+        return 'document';
     }
 }
 
@@ -435,8 +549,7 @@ function hideLoading() {
     loadingOverlay.classList.remove('show');
 }
 
-function showResults(html) {
-    resultContent.innerHTML = html;
+function showResults() {
     resultSection.classList.add('show');
     resultSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
@@ -461,13 +574,13 @@ function showToast(type, message) {
     toastMessage.textContent = message;
     toast.classList.add('show');
     
-    // Auto hide after 5 seconds
+    // Auto hide after 4 seconds
     setTimeout(() => {
         toast.classList.remove('show');
-    }, 5000);
+    }, 4000);
 }
 
-// Smooth Scrolling
+// Smooth scrolling for navigation links
 function initializeSmoothScrolling() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
@@ -483,7 +596,7 @@ function initializeSmoothScrolling() {
     });
 }
 
-// Animations
+// Initialize animations and scroll effects
 function initializeAnimations() {
     // Intersection Observer for animations
     const observerOptions = {
@@ -497,7 +610,6 @@ function initializeAnimations() {
                 entry.target.style.animationDelay = '0.1s';
                 entry.target.style.animationFillMode = 'both';
                 entry.target.style.animationName = 'fadeInUp';
-                entry.target.style.animationDuration = '0.6s';
             }
         });
     }, observerOptions);
@@ -506,166 +618,35 @@ function initializeAnimations() {
     document.querySelectorAll('.feature-card, .step, .platform-tab').forEach(el => {
         observer.observe(el);
     });
-}
 
-// Header scroll effect
-window.addEventListener('scroll', () => {
-    const header = document.querySelector('.header');
-    if (window.scrollY > 100) {
-        header.style.background = 'rgba(10, 10, 15, 0.98)';
-        header.style.boxShadow = '0 5px 20px rgba(102, 126, 234, 0.1)';
-    } else {
-        header.style.background = 'rgba(10, 10, 15, 0.95)';
-        header.style.boxShadow = 'none';
-    }
-});
-
-// Particles effect
-function createParticles() {
-    const particles = document.querySelector('.hero-particles');
-    if (!particles) return;
-    
-    for (let i = 0; i < 50; i++) {
-        const particle = document.createElement('div');
-        particle.style.position = 'absolute';
-        particle.style.width = Math.random() * 4 + 'px';
-        particle.style.height = particle.style.width;
-        particle.style.background = `rgba(102, 126, 234, ${Math.random() * 0.5})`;
-        particle.style.borderRadius = '50%';
-        particle.style.left = Math.random() * 100 + '%';
-        particle.style.top = Math.random() * 100 + '%';
-        particle.style.animation = `float ${Math.random() * 3 + 2}s ease-in-out infinite`;
-        particle.style.animationDelay = Math.random() * 2 + 's';
-        particles.appendChild(particle);
-    }
-}
-
-// Initialize particles on load
-window.addEventListener('load', createParticles);
-
-// Error handling for images
-document.addEventListener('error', (e) => {
-    if (e.target.tagName === 'IMG') {
-        e.target.src = '/api/placeholder/400/300';
-    }
-}, true);
-
-// PWA support
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js')
-            .then(registration => {
-                console.log('SW registered: ', registration);
-            })
-            .catch(registrationError => {
-                console.log('SW registration failed: ', registrationError);
-            });
+    // Header scroll effect
+    window.addEventListener('scroll', () => {
+        const header = document.querySelector('.header');
+        if (window.scrollY > 100) {
+            header.style.background = 'rgba(10, 10, 15, 0.98)';
+            header.style.boxShadow = '0 2px 20px rgba(102, 126, 234, 0.1)';
+        } else {
+            header.style.background = 'rgba(10, 10, 15, 0.95)';
+            header.style.boxShadow = 'none';
+        }
     });
 }
 
-// Keyboard shortcuts
-document.addEventListener('keydown', (e) => {
-    // Ctrl/Cmd + K to focus search
-    if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
-        e.preventDefault();
-        const activeInput = document.querySelector('.platform-content.active .url-input');
-        if (activeInput) {
-            activeInput.focus();
-        }
-    }
-    
-    // Escape to close mobile menu
-    if (e.key === 'Escape') {
+// Handle window resize
+window.addEventListener('resize', () => {
+    // Close mobile menu on resize
+    if (window.innerWidth > 768) {
         navMenu.classList.remove('active');
         navToggle.classList.remove('active');
     }
 });
 
-// Theme switcher (optional)
-function toggleTheme() {
-    document.body.classList.toggle('light-theme');
-    localStorage.setItem('theme', document.body.classList.contains('light-theme') ? 'light' : 'dark');
-}
-
-// Load saved theme
-const savedTheme = localStorage.getItem('theme');
-if (savedTheme === 'light') {
-    document.body.classList.add('light-theme');
-}
-
-// Copy to clipboard functionality
-function copyToClipboard(text) {
-    navigator.clipboard.writeText(text).then(() => {
-        showToast('success', 'Link berhasil disalin!');
-    }).catch(() => {
-        showToast('error', 'Gagal menyalin link!');
-    });
-}
-
-// Download progress tracking
-function trackDownload(platform, type) {
-    // Analytics tracking could be implemented here
-    console.log(`Download tracked: ${platform} - ${type}`);
-}
-
-// Performance optimization
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-}
-
-// Lazy loading for images
-function lazyLoadImages() {
-    const images = document.querySelectorAll('img[data-src]');
-    const imageObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                img.src = img.dataset.src;
-                img.classList.remove('lazy');
-                imageObserver.unobserve(img);
-            }
-        });
-    });
-
-    images.forEach(img => imageObserver.observe(img));
-}
-
-// Initialize lazy loading
-document.addEventListener('DOMContentLoaded', lazyLoadImages);
-
-// Auto-clear input after successful download
-function clearInputAfterDownload(platform) {
-    setTimeout(() => {
-        const input = document.getElementById(`${platform}-url`);
-        if (input) {
-            input.value = '';
-        }
-    }, 3000);
-}
-
-// Update download functions to include auto-clear
-const originalDownloadTikTok = downloadTikTok;
-downloadTikTok = async function(url) {
-    await originalDownloadTikTok(url);
-    clearInputAfterDownload('tiktok');
-};
-
-const originalDownloadFacebook = downloadFacebook;
-downloadFacebook = async function(url) {
-    await originalDownloadFacebook(url);
-    clearInputAfterDownload('facebook');
-};
-
-const originalDownloadScribd = downloadScribd;
-downloadScribd = async function(url) {
-    await originalDownloadScribd(url);
-    clearInputAfterDownload('scribd');
-};
+// Debug function to log API responses
+function debugApiResponse(platform, data) {
+    console.log(`${platform} API Response:`, data);
+    
+    // Log available properties for debugging
+    if (data.data) {
+        console.log(`Available ${platform} properties:`, Object.keys(data.data));
+    }
+                                                         }
