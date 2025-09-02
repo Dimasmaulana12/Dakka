@@ -3,205 +3,405 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TikTok Downloader - Download Video TikTok Gratis</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Dmaz Tools - Download TikTok, Facebook & Scribd Gratis</title>
+    <meta name="description" content="Dmaz Tools - Platform terlengkap untuk download video TikTok, Facebook, dan dokumen Scribd secara gratis tanpa watermark">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iOCIgZmlsbD0iIzAwN0FGRiIvPgo8cGF0aCBkPSJNOCAxMkgyNFYyMEg4VjEyWiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+">
 </head>
 <body>
+    <!-- Preloader -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-content">
+            <div class="dmaz-logo">
+                <i class="fas fa-tools"></i>
+                <span>Dmaz Tools</span>
+            </div>
+            <div class="loading-spinner"></div>
+        </div>
+    </div>
+
     <!-- Header -->
     <header class="header">
         <div class="container">
-            <div class="nav">
-                <div class="logo">
-                    <i class="fab fa-tiktok"></i>
-                    <span>TikTok Downloader</span>
+            <nav class="navbar">
+                <div class="nav-brand">
+                    <div class="logo">
+                        <i class="fas fa-tools"></i>
+                        <span>Dmaz Tools</span>
+                    </div>
                 </div>
-                <div class="nav-links">
-                    <a href="#home">Home</a>
-                    <a href="#about">About</a>
-                    <a href="#contact">Contact</a>
+                
+                <div class="nav-menu" id="nav-menu">
+                    <div class="nav-links">
+                        <a href="#home" class="nav-link">Home</a>
+                        <a href="#features" class="nav-link">Features</a>
+                        <a href="#tools" class="nav-link">Tools</a>
+                        <a href="#about" class="nav-link">About</a>
+                        <a href="#contact" class="nav-link">Contact</a>
+                    </div>
                 </div>
-            </div>
+                
+                <div class="nav-toggle" id="nav-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
         </div>
     </header>
 
-    <!-- Main Content -->
-    <main class="main">
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-bg">
+            <div class="hero-particles"></div>
+        </div>
         <div class="container">
-            <!-- Hero Section -->
-            <section class="hero" id="home">
-                <div class="hero-content">
-                    <h1>Download Video TikTok</h1>
-                    <p>Download video TikTok tanpa watermark dengan kualitas HD. Gratis, cepat, dan mudah digunakan!</p>
-                    
-                    <!-- Download Form -->
-                    <div class="download-form">
-                        <div class="input-group">
-                            <input type="url" id="tiktok-url" placeholder="Masukkan link TikTok disini..." required>
-                            <button type="button" id="download-btn">
-                                <i class="fas fa-download"></i>
-                                Download
-                            </button>
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">
+                        <span class="gradient-text">Dmaz Tools</span>
+                        <br>Platform Download Terlengkap
+                    </h1>
+                    <p class="hero-description">
+                        Download video TikTok, Facebook, dan dokumen Scribd dengan mudah, cepat, dan gratis. 
+                        Tanpa watermark, kualitas HD, dan 100% aman.
+                    </p>
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">1M+</span>
+                            <span class="stat-label">Downloads</span>
                         </div>
-                        <div class="form-help">
-                            <p><i class="fas fa-info-circle"></i> Contoh: https://vt.tiktok.com/ZSY8XguF2/</p>
+                        <div class="stat-item">
+                            <span class="stat-number">50K+</span>
+                            <span class="stat-label">Users</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">3</span>
+                            <span class="stat-label">Platforms</span>
                         </div>
                     </div>
                 </div>
-            </section>
-
-            <!-- Loading Animation -->
-            <div class="loading" id="loading">
-                <div class="spinner"></div>
-                <p>Sedang memproses video...</p>
-            </div>
-
-            <!-- Result Section -->
-            <section class="result" id="result">
-                <div class="video-card">
-                    <div class="video-info">
-                        <div class="video-thumbnail">
-                            <img id="video-cover" src="" alt="Video Thumbnail">
-                            <div class="play-button">
-                                <i class="fas fa-play"></i>
+                <div class="hero-visual">
+                    <div class="floating-card">
+                        <div class="card-header">
+                            <div class="card-dots">
+                                <span></span><span></span><span></span>
                             </div>
                         </div>
-                        <div class="video-details">
-                            <h3 id="video-title">Judul Video</h3>
-                            <div class="video-stats">
-                                <span><i class="fas fa-eye"></i> <span id="play-count">0</span> views</span>
-                                <span><i class="fas fa-share"></i> <span id="share-count">0</span> shares</span>
-                                <span><i class="fas fa-heart"></i> <span id="download-count">0</span> downloads</span>
-                            </div>
-                            <div class="author-info">
-                                <img id="author-avatar" src="" alt="Author">
-                                <div>
-                                    <p class="author-name" id="author-name">@username</p>
-                                    <p class="author-nickname" id="author-nickname">Nickname</p>
+                        <div class="card-content">
+                            <div class="platform-icons">
+                                <div class="platform-icon tiktok">
+                                    <i class="fab fa-tiktok"></i>
+                                </div>
+                                <div class="platform-icon facebook">
+                                    <i class="fab fa-facebook"></i>
+                                </div>
+                                <div class="platform-icon scribd">
+                                    <i class="fas fa-file-pdf"></i>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
-                    <!-- Download Options -->
-                    <div class="download-options">
-                        <div class="option-card">
-                            <div class="option-info">
-                                <h4><i class="fas fa-video"></i> Video (MP4)</h4>
-                                <p>Download video dengan kualitas original</p>
-                                <span class="file-size" id="video-size">0 MB</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Platform Selection -->
+    <section class="platform-selection" id="tools">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Pilih Platform</h2>
+                <p class="section-description">Pilih platform yang ingin Anda gunakan untuk download</p>
+            </div>
+            
+            <div class="platform-tabs">
+                <button class="platform-tab active" data-platform="tiktok">
+                    <i class="fab fa-tiktok"></i>
+                    <span>TikTok</span>
+                </button>
+                <button class="platform-tab" data-platform="facebook">
+                    <i class="fab fa-facebook"></i>
+                    <span>Facebook</span>
+                </button>
+                <button class="platform-tab" data-platform="scribd">
+                    <i class="fas fa-file-pdf"></i>
+                    <span>Scribd</span>
+                </button>
+            </div>
+
+            <!-- TikTok Downloader -->
+            <div class="platform-content active" id="tiktok-content">
+                <div class="download-section">
+                    <div class="download-card">
+                        <div class="card-header">
+                            <div class="platform-info">
+                                <div class="platform-icon-large tiktok">
+                                    <i class="fab fa-tiktok"></i>
+                                </div>
+                                <div class="platform-details">
+                                    <h3>TikTok Downloader</h3>
+                                    <p>Download video TikTok tanpa watermark dalam kualitas HD</p>
+                                </div>
                             </div>
-                            <button class="download-option-btn" id="download-video">
-                                <i class="fas fa-download"></i>
-                                Download Video
-                            </button>
                         </div>
                         
-                        <div class="option-card">
-                            <div class="option-info">
-                                <h4><i class="fas fa-music"></i> Audio (MP3)</h4>
-                                <p>Download audio/musik dari video</p>
-                                <span class="file-size">Audio</span>
+                        <div class="download-form">
+                            <div class="input-container">
+                                <div class="input-group">
+                                    <div class="input-icon">
+                                        <i class="fas fa-link"></i>
+                                    </div>
+                                    <input type="url" id="tiktok-url" placeholder="Paste link TikTok disini..." class="url-input">
+                                    <button type="button" id="tiktok-download-btn" class="download-btn">
+                                        <i class="fas fa-download"></i>
+                                        <span>Download</span>
+                                    </button>
+                                </div>
+                                <div class="input-help">
+                                    <i class="fas fa-info-circle"></i>
+                                    <span>Contoh: https://vt.tiktok.com/ZSY8XguF2/</span>
+                                </div>
                             </div>
-                            <button class="download-option-btn" id="download-audio">
-                                <i class="fas fa-download"></i>
-                                Download Audio
-                            </button>
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
 
-            <!-- Features Section -->
-            <section class="features" id="about">
-                <h2>Mengapa Memilih Kami?</h2>
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-bolt"></i>
+            <!-- Facebook Downloader -->
+            <div class="platform-content" id="facebook-content">
+                <div class="download-section">
+                    <div class="download-card">
+                        <div class="card-header">
+                            <div class="platform-info">
+                                <div class="platform-icon-large facebook">
+                                    <i class="fab fa-facebook"></i>
+                                </div>
+                                <div class="platform-details">
+                                    <h3>Facebook Downloader</h3>
+                                    <p>Download video Facebook dalam kualitas HD dan SD</p>
+                                </div>
+                            </div>
                         </div>
-                        <h3>Super Cepat</h3>
-                        <p>Download video TikTok dengan kecepatan tinggi dalam hitungan detik</p>
-                    </div>
-                    
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-shield-alt"></i>
+                        
+                        <div class="download-form">
+                            <div class="input-container">
+                                <div class="input-group">
+                                    <div class="input-icon">
+                                        <i class="fas fa-link"></i>
+                                    </div>
+                                    <input type="url" id="facebook-url" placeholder="Paste link Facebook disini..." class="url-input">
+                                    <button type="button" id="facebook-download-btn" class="download-btn">
+                                        <i class="fas fa-download"></i>
+                                        <span>Download</span>
+                                    </button>
+                                </div>
+                                <div class="input-help">
+                                    <i class="fas fa-info-circle"></i>
+                                    <span>Contoh: https://www.facebook.com/share/video/123456789/</span>
+                                </div>
+                            </div>
                         </div>
-                        <h3>100% Aman</h3>
-                        <p>Tidak ada malware, virus, atau software berbahaya. Sangat aman digunakan</p>
-                    </div>
-                    
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-mobile-alt"></i>
-                        </div>
-                        <h3>All Device</h3>
-                        <p>Bisa digunakan di semua perangkat: PC, tablet, dan smartphone</p>
-                    </div>
-                    
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-gift"></i>
-                        </div>
-                        <h3>Gratis Selamanya</h3>
-                        <p>Tidak ada biaya tersembunyi. Gunakan sebanyak yang Anda mau, gratis!</p>
                     </div>
                 </div>
-            </section>
+            </div>
 
-            <!-- How to Use Section -->
-            <section class="how-to-use">
-                <h2>Cara Menggunakan</h2>
-                <div class="steps">
-                    <div class="step">
-                        <div class="step-number">1</div>
-                        <div class="step-content">
-                            <h3>Copy Link TikTok</h3>
-                            <p>Buka aplikasi TikTok, pilih video yang ingin didownload, lalu copy linknya</p>
+            <!-- Scribd Downloader -->
+            <div class="platform-content" id="scribd-content">
+                <div class="download-section">
+                    <div class="download-card">
+                        <div class="card-header">
+                            <div class="platform-info">
+                                <div class="platform-icon-large scribd">
+                                    <i class="fas fa-file-pdf"></i>
+                                </div>
+                                <div class="platform-details">
+                                    <h3>Scribd Downloader</h3>
+                                    <p>Download dokumen Scribd dalam format PDF</p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    
-                    <div class="step">
-                        <div class="step-number">2</div>
-                        <div class="step-content">
-                            <h3>Paste Link</h3>
-                            <p>Paste link TikTok ke kolom input yang tersedia di atas</p>
-                        </div>
-                    </div>
-                    
-                    <div class="step">
-                        <div class="step-number">3</div>
-                        <div class="step-content">
-                            <h3>Download</h3>
-                            <p>Klik tombol download dan tunggu beberapa detik, video akan terdownload otomatis</p>
+                        
+                        <div class="download-form">
+                            <div class="input-container">
+                                <div class="input-group">
+                                    <div class="input-icon">
+                                        <i class="fas fa-link"></i>
+                                    </div>
+                                    <input type="url" id="scribd-url" placeholder="Paste link Scribd disini..." class="url-input">
+                                    <button type="button" id="scribd-download-btn" class="download-btn">
+                                        <i class="fas fa-download"></i>
+                                        <span>Download</span>
+                                    </button>
+                                </div>
+                                <div class="input-help">
+                                    <i class="fas fa-info-circle"></i>
+                                    <span>Contoh: https://id.scribd.com/document/438365833/TUGAS-KLIPING</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
         </div>
-    </main>
+    </section>
+
+    <!-- Loading Animation -->
+    <div class="loading-overlay" id="loading-overlay">
+        <div class="loading-content">
+            <div class="loading-spinner-large"></div>
+            <h3 id="loading-text">Memproses permintaan...</h3>
+            <p id="loading-description">Mohon tunggu sebentar</p>
+        </div>
+    </div>
+
+    <!-- Result Section -->
+    <section class="result-section" id="result-section">
+        <div class="container">
+            <div class="result-content" id="result-content">
+                <!-- Results will be dynamically inserted here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Mengapa Memilih Dmaz Tools?</h2>
+                <p class="section-description">Platform terpercaya dengan fitur lengkap dan kualitas terbaik</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3>Super Cepat</h3>
+                    <p>Download dengan kecepatan tinggi dalam hitungan detik</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>100% Aman</h3>
+                    <p>Tidak ada malware atau virus. Sangat aman digunakan</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Multi Platform</h3>
+                    <p>Bisa digunakan di semua perangkat dan browser</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-gem"></i>
+                    </div>
+                    <h3>Kualitas HD</h3>
+                    <p>Download video dalam kualitas tertinggi yang tersedia</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-ban"></i>
+                    </div>
+                    <h3>Tanpa Watermark</h3>
+                    <p>Video yang didownload bebas dari watermark</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-gift"></i>
+                    </div>
+                    <h3>Gratis Selamanya</h3>
+                    <p>Tidak ada biaya tersembunyi atau batasan</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How to Use Section -->
+    <section class="how-to-use" id="about">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Cara Menggunakan</h2>
+                <p class="section-description">Mudah digunakan dalam 3 langkah sederhana</p>
+            </div>
+            
+            <div class="steps-container">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Copy Link</h3>
+                        <p>Salin link video atau dokumen yang ingin Anda download dari platform yang dipilih</p>
+                    </div>
+                </div>
+                
+                <div class="step-connector"></div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Paste & Process</h3>
+                        <p>Paste link ke dalam kolom input dan klik tombol download</p>
+                    </div>
+                </div>
+                
+                <div class="step-connector"></div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Download</h3>
+                        <p>Pilih kualitas yang diinginkan dan download file secara gratis</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Footer -->
     <footer class="footer" id="contact">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <div class="logo">
-                        <i class="fab fa-tiktok"></i>
-                        <span>TikTok Downloader</span>
+                    <div class="footer-brand">
+                        <div class="logo">
+                            <i class="fas fa-tools"></i>
+                            <span>Dmaz Tools</span>
+                        </div>
+                        <p>Platform download terlengkap untuk TikTok, Facebook, dan Scribd. Gratis, cepat, dan aman.</p>
+                        <div class="social-links">
+                            <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
+                        </div>
                     </div>
-                    <p>Download video TikTok dengan mudah, cepat, dan gratis. Tanpa watermark, kualitas HD.</p>
                 </div>
                 
                 <div class="footer-section">
                     <h4>Quick Links</h4>
                     <ul>
                         <li><a href="#home">Home</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#tools">Tools</a></li>
                         <li><a href="#about">About</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Tools</h4>
+                    <ul>
+                        <li><a href="#" data-platform="tiktok">TikTok Downloader</a></li>
+                        <li><a href="#" data-platform="facebook">Facebook Downloader</a></li>
+                        <li><a href="#" data-platform="scribd">Scribd Downloader</a></li>
                     </ul>
                 </div>
                 
@@ -210,18 +410,26 @@
                     <ul>
                         <li><a href="#">FAQ</a></li>
                         <li><a href="#">Help Center</a></li>
-                        <li><a href="#">Report Issue</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
                         <li><a href="#">Terms of Service</a></li>
                     </ul>
                 </div>
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; 2024 TikTok Downloader. All rights reserved.</p>
+                <p>&copy; 2024 Dmaz Tools. All rights reserved. Made with ❤️ by Dmaz</p>
             </div>
         </div>
     </footer>
 
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <div class="toast-content">
+            <i class="toast-icon"></i>
+            <span class="toast-message"></span>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
-                                                                  </html>
+        </html>
