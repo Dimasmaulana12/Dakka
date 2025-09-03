@@ -39,16 +39,37 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 // Modal Functions
 function openModal(toolType, toolName) {
-    modal.style.display = 'block';
-    modalTitle.textContent = toolName;
-    resultContainer.style.display = 'none';
-    loadToolContent(toolType);
+    try {
+        if (!modal) {
+            console.error('Modal element not found');
+            return;
+        }
+        
+        console.log(`Opening modal for: ${toolType}`);
+        modal.style.display = 'block';
+        modalTitle.textContent = toolName;
+        resultContainer.style.display = 'none';
+        loadToolContent(toolType);
+    } catch (error) {
+        console.error('Error opening modal:', error);
+        showError('Terjadi kesalahan saat membuka tool.');
+    }
 }
 
 function closeModal() {
-    modal.style.display = 'none';
-    toolContent.innerHTML = '';
-    resultContainer.style.display = 'none';
+    try {
+        if (!modal) {
+            console.error('Modal element not found');
+            return;
+        }
+        
+        modal.style.display = 'none';
+        toolContent.innerHTML = '';
+        resultContainer.style.display = 'none';
+        console.log('Modal closed');
+    } catch (error) {
+        console.error('Error closing modal:', error);
+    }
 }
 
 function showLoading() {
@@ -69,18 +90,39 @@ window.addEventListener('click', (e) => {
 
 // Tool Card Click Events
 document.addEventListener('DOMContentLoaded', () => {
-    const toolCards = document.querySelectorAll('.tool-card');
-    
-    toolCards.forEach(card => {
-        const toolBtn = card.querySelector('.tool-btn');
-        const toolType = card.getAttribute('data-tool');
-        const toolName = card.querySelector('h3').textContent;
+    try {
+        const toolCards = document.querySelectorAll('.tool-card');
+        console.log(`Found ${toolCards.length} tool cards`);
         
-        toolBtn?.addEventListener('click', (e) => {
-            e.preventDefault();
-            openModal(toolType, toolName);
+        toolCards.forEach((card, index) => {
+            const toolBtn = card.querySelector('.tool-btn');
+            const toolType = card.getAttribute('data-tool');
+            const toolName = card.querySelector('h3')?.textContent || 'Unknown Tool';
+            
+            if (!toolBtn) {
+                console.warn(`Tool button not found for card ${index}`);
+                return;
+            }
+            
+            if (!toolType) {
+                console.warn(`Tool type not found for card ${index} (${toolName})`);
+                return;
+            }
+            
+            toolBtn.addEventListener('click', (e) => {
+                try {
+                    e.preventDefault();
+                    console.log(`Opening modal for tool: ${toolType} (${toolName})`);
+                    openModal(toolType, toolName);
+                } catch (error) {
+                    console.error(`Error opening modal for ${toolType}:`, error);
+                    showError('Terjadi kesalahan saat membuka tool. Silakan coba lagi.');
+                }
+            });
         });
-    });
+    } catch (error) {
+        console.error('Error setting up tool card events:', error);
+    }
 });
 
 // Load Tool Content
@@ -270,58 +312,79 @@ function loadToolContent(toolType) {
             content = '<p>Tool ini sedang dalam pengembangan.</p>';
     }
     
-    toolContent.innerHTML = content;
-    attachFormEvents(toolType);
+    try {
+        if (!toolContent) {
+            console.error('Tool content container not found');
+            return;
+        }
+        
+        toolContent.innerHTML = content;
+        console.log(`Loaded content for tool: ${toolType}`);
+        attachFormEvents(toolType);
+    } catch (error) {
+        console.error(`Error loading tool content for ${toolType}:`, error);
+        toolContent.innerHTML = '<p>Terjadi kesalahan saat memuat tool. Silakan coba lagi.</p>';
+    }
 }
 
 // Attach Form Events
 function attachFormEvents(toolType) {
-    switch(toolType) {
-        case 'igstalk':
-            document.getElementById('igstalkForm')?.addEventListener('submit', handleIgStalk);
-            break;
-        case 'gempa':
-            document.getElementById('getGempaBtn')?.addEventListener('click', handleGempa);
-            break;
-        case 'cuaca':
-            document.getElementById('cuacaForm')?.addEventListener('submit', handleCuaca);
-            break;
-        case 'tiktok':
-            document.getElementById('tiktokForm')?.addEventListener('submit', handleTikTok);
-            break;
-        case 'igdl':
-            document.getElementById('igdlForm')?.addEventListener('submit', handleIgDownload);
-            break;
-        case 'facebook':
-            document.getElementById('facebookForm')?.addEventListener('submit', handleFacebook);
-            break;
-        case 'pinterest':
-            document.getElementById('pinterestForm')?.addEventListener('submit', handlePinterest);
-            break;
-        case 'gdrive':
-            document.getElementById('gdriveForm')?.addEventListener('submit', handleGoogleDrive);
-            break;
-        case 'capcut':
-            document.getElementById('capcutForm')?.addEventListener('submit', handleCapCut);
-            break;
-        case 'terabox':
-            document.getElementById('teraboxForm')?.addEventListener('submit', handleTerabox);
-            break;
-        case 'ai':
-            document.getElementById('aiForm')?.addEventListener('submit', handleAI);
-            break;
-        case 'susunkata':
-            document.getElementById('startGameBtn')?.addEventListener('click', handleSusunKata);
-            break;
-        case 'sticker':
-            document.getElementById('stickerForm')?.addEventListener('submit', handleSticker);
-            break;
-        case 'scribd':
-            document.getElementById('scribdForm')?.addEventListener('submit', handleScribd);
-            break;
-        case 'emojimix':
-            document.getElementById('emojimixForm')?.addEventListener('submit', handleEmojiMix);
-            break;
+    try {
+        console.log(`Attaching form events for: ${toolType}`);
+        
+        switch(toolType) {
+            case 'igstalk':
+                document.getElementById('igstalkForm')?.addEventListener('submit', handleIgStalk);
+                break;
+            case 'gempa':
+                document.getElementById('getGempaBtn')?.addEventListener('click', handleGempa);
+                break;
+            case 'cuaca':
+                document.getElementById('cuacaForm')?.addEventListener('submit', handleCuaca);
+                break;
+            case 'tiktok':
+                document.getElementById('tiktokForm')?.addEventListener('submit', handleTikTok);
+                break;
+            case 'igdl':
+                document.getElementById('igdlForm')?.addEventListener('submit', handleIgDownload);
+                break;
+            case 'facebook':
+                document.getElementById('facebookForm')?.addEventListener('submit', handleFacebook);
+                break;
+            case 'pinterest':
+                document.getElementById('pinterestForm')?.addEventListener('submit', handlePinterest);
+                break;
+            case 'gdrive':
+                document.getElementById('gdriveForm')?.addEventListener('submit', handleGoogleDrive);
+                break;
+            case 'capcut':
+                document.getElementById('capcutForm')?.addEventListener('submit', handleCapCut);
+                break;
+            case 'terabox':
+                document.getElementById('teraboxForm')?.addEventListener('submit', handleTerabox);
+                break;
+            case 'ai':
+                document.getElementById('aiForm')?.addEventListener('submit', handleAI);
+                break;
+            case 'susunkata':
+                document.getElementById('startGameBtn')?.addEventListener('click', handleSusunKata);
+                break;
+            case 'sticker':
+                document.getElementById('stickerForm')?.addEventListener('submit', handleSticker);
+                break;
+            case 'scribd':
+                document.getElementById('scribdForm')?.addEventListener('submit', handleScribd);
+                break;
+            case 'emojimix':
+                document.getElementById('emojimixForm')?.addEventListener('submit', handleEmojiMix);
+                break;
+            default:
+                console.warn(`No form events defined for tool type: ${toolType}`);
+        }
+        
+        console.log(`Form events attached successfully for: ${toolType}`);
+    } catch (error) {
+        console.error(`Error attaching form events for ${toolType}:`, error);
     }
 }
 
@@ -1093,11 +1156,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Add any initialization code here
     
-    // Show welcome message
-    setTimeout(() => {
-        showNotification('Selamat datang di DMAZ Tools! 🛠️', 'success');
-    }, 1000);
-});
     // Show welcome message
     setTimeout(() => {
         showNotification('Selamat datang di DMAZ Tools! 🛠️', 'success');
