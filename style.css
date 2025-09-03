@@ -243,6 +243,8 @@ body {
     cursor: pointer;
     font-weight: bold;
     transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
 }
 
 .tool-btn:hover {
@@ -384,6 +386,8 @@ body {
     width: 100%;
     font-size: 1.1rem;
     transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
 }
 
 .submit-btn:hover {
@@ -573,6 +577,250 @@ body {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+.animate-fade-in-up {
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+/* === TAMBAHAN CSS UNTUK FUNCTIONALITY === */
+
+/* Back to top button */
+.back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    box-shadow: 0 4px 20px rgba(102, 126, 234, 0.3);
+}
+
+.back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.back-to-top:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 25px rgba(102, 126, 234, 0.4);
+}
+
+/* Notification system */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 20px;
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
+    z-index: 2000;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    max-width: 300px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.notification.show {
+    transform: translateX(0);
+}
+
+.notification-success {
+    background: linear-gradient(45deg, #4CAF50, #45a049);
+}
+
+.notification-error {
+    background: linear-gradient(45deg, #f44336, #da190b);
+}
+
+.notification-info {
+    background: linear-gradient(45deg, #2196F3, #0b7dda);
+}
+
+/* Ripple effect */
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(0);
+    animation: ripple-animation 0.6s linear;
+    pointer-events: none;
+}
+
+@keyframes ripple-animation {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* Info box styling */
+.info-box {
+    text-align: center;
+    padding: 20px;
+}
+
+.info-box p {
+    margin-bottom: 20px;
+    color: #666;
+    line-height: 1.6;
+}
+
+/* Enhanced form styling */
+.form-group input:valid {
+    border-color: #4CAF50;
+}
+
+.form-group input:invalid:not(:placeholder-shown) {
+    border-color: #f44336;
+}
+
+/* Loading enhancements */
+.loading-overlay p {
+    margin-top: 10px;
+    font-size: 1.1rem;
+}
+
+/* Dark theme support (optional) */
+.dark-theme {
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    color: #ecf0f1;
+}
+
+.dark-theme .tools-section {
+    background: #2c3e50;
+}
+
+.dark-theme .tool-card {
+    background: #34495e;
+    color: #ecf0f1;
+}
+
+.dark-theme .modal-content {
+    background: #34495e;
+    color: #ecf0f1;
+}
+
+.dark-theme .form-group input,
+.dark-theme .form-group textarea {
+    background: #2c3e50;
+    color: #ecf0f1;
+    border-color: #4a6741;
+}
+
+/* Enhanced hover effects */
+.tool-card:hover .tool-icon {
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
+}
+
+.tool-btn:active {
+    transform: scale(0.98);
+}
+
+.submit-btn:active {
+    transform: translateY(0);
+}
+
+/* Additional animations */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(102, 126, 234, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(102, 126, 234, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(102, 126, 234, 0);
+    }
+}
+
+.tool-btn:focus {
+    animation: pulse 2s infinite;
+}
+
+/* Responsive modal adjustments */
+@media (max-width: 480px) {
+    .notification {
+        top: 10px;
+        right: 10px;
+        left: 10px;
+        max-width: none;
+    }
+    
+    .back-to-top {
+        bottom: 15px;
+        right: 15px;
+        width: 45px;
+        height: 45px;
+        font-size: 1.3rem;
+    }
+    
+    .modal-content {
+        margin: 5% auto;
+        max-height: 90vh;
+    }
+    
+    .modal-header {
+        padding: 15px;
+    }
+    
+    .modal-body {
+        padding: 15px;
+    }
+}
+
+/* Print styles (optional) */
+@media print {
+    .navbar,
+    .back-to-top,
+    .notification,
+    .loading-overlay,
+    .modal {
+        display: none !important;
+    }
+}
+
+/* Accessibility improvements */
+.tool-btn:focus,
+.submit-btn:focus,
+.download-link:focus {
+    outline: 2px solid #667eea;
+    outline-offset: 2px;
+}
+
+/* Smooth scroll behavior */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(45deg, #5a6fd8, #6a4190);
+}
 }
 
 .animate-fade-in-up {
